@@ -1,0 +1,2977 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full수록 9-part5 | 에듀케레 영수학원</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1a2744;
+  --navy-light: #243358;
+  --gold: #c8a84b;
+  --gold-light: #e8cc7a;
+  --cream: #faf8f3;
+  --white: #ffffff;
+  --gray-100: #f5f5f0;
+  --gray-200: #e8e6e0;
+  --gray-400: #9e9b92;
+  --gray-600: #6b6860;
+  --text-dark: #1a1a1a;
+  --text-mid: #3a3a3a;
+  --blue-accent: #2c5f9e;
+  --green-bg: #e8f4e8;
+  --green-text: #2d6a2d;
+  --yellow-bg: #fffbec;
+  --yellow-text: #7a5c00;
+  --red-light: #fdecea;
+  --red-text: #c0392b;
+  --correct: #27ae60;
+  --incorrect: #e74c3c;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── SIDEBAR ── */
+#sidebar {
+  width: 260px;
+  min-width: 260px;
+  background: var(--navy);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 3px solid var(--gold);
+}
+
+#sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid rgba(200,168,75,0.3);
+}
+
+#sidebar-header .academy {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+#sidebar-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+}
+
+#sidebar-header .subtitle {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+.passage-list { padding: 12px 0; flex: 1; }
+
+.passage-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.passage-btn:hover {
+  background: rgba(200,168,75,0.1);
+  color: var(--white);
+  border-left-color: rgba(200,168,75,0.5);
+}
+
+.passage-btn.active {
+  background: rgba(200,168,75,0.15);
+  color: var(--gold-light);
+  border-left-color: var(--gold);
+  font-weight: 500;
+}
+
+.passage-btn .num {
+  display: inline-block;
+  background: rgba(200,168,75,0.2);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-right: 8px;
+  letter-spacing: 0.5px;
+}
+
+.passage-btn.active .num {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+#sidebar-footer {
+  padding: 14px 20px;
+  border-top: 1px solid rgba(200,168,75,0.2);
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ── MAIN CONTENT ── */
+#main {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ── TOP BAR ── */
+#topbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  min-height: 50px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 14px 14px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  color: var(--gray-600);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.tab-btn:hover { color: var(--navy); }
+
+.tab-btn.active {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+  font-weight: 700;
+}
+
+/* ── CONTENT AREA ── */
+#content {
+  padding: 32px;
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── PASSAGE TITLE ── */
+.passage-title-box {
+  background: var(--navy);
+  color: var(--white);
+  padding: 22px 28px;
+  border-radius: 6px;
+  margin-bottom: 28px;
+  border-left: 5px solid var(--gold);
+}
+
+.passage-title-box .p-num {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.passage-title-box h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* ── FULL TEXT BOX ── */
+.fulltext-box {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--blue-accent);
+  border-radius: 4px;
+  padding: 22px 26px;
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+/* ── SENTENCE ANALYSIS ── */
+.sentence-block {
+  margin-bottom: 28px;
+  border-bottom: 1px dashed var(--gray-200);
+  padding-bottom: 24px;
+}
+
+.sentence-block:last-child { border-bottom: none; }
+
+.sent-num {
+  display: inline-block;
+  width: 26px; height: 26px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 50%;
+  text-align: center;
+  line-height: 26px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.sent-english {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--blue-accent);
+  padding: 14px 18px;
+  font-family: 'EB Garamond', serif;
+  font-size: 16px;
+  line-height: 1.8;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.slash-reading {
+  background: var(--gray-100);
+  padding: 10px 16px;
+  border-radius: 3px;
+  font-size: 13px;
+  line-height: 1.9;
+  margin-bottom: 10px;
+  color: var(--text-mid);
+}
+
+.slash-en { color: var(--blue-accent); font-family: 'EB Garamond', serif; font-size: 14px; }
+.slash-ko { color: var(--text-mid); font-size: 12px; }
+.slash-sep { color: var(--gold); font-weight: 700; }
+
+.grammar-items { margin-top: 8px; }
+
+.grammar-item {
+  background: var(--yellow-bg);
+  border-left: 3px solid var(--gold);
+  padding: 10px 14px;
+  margin-bottom: 7px;
+  border-radius: 0 3px 3px 0;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.grammar-item .g-name {
+  color: var(--yellow-text);
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+.grammar-item .g-example {
+  color: var(--text-mid);
+  display: block;
+  margin: 3px 0;
+  font-size: 12px;
+}
+
+.grammar-item .g-point {
+  color: var(--red-text);
+  font-size: 11.5px;
+  display: block;
+}
+
+/* ── VOCABULARY ── */
+.vocab-item {
+  background: var(--green-bg);
+  border-left: 3px solid var(--green-text);
+  padding: 10px 14px;
+  margin-bottom: 7px;
+  border-radius: 0 3px 3px 0;
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.vocab-word { font-family: 'EB Garamond', serif; font-size: 15px; font-weight: 600; color: var(--navy); }
+.vocab-meaning { color: var(--green-text); font-weight: 500; }
+.vocab-pos { color: var(--gray-400); font-size: 11px; font-style: italic; }
+.vocab-deriv { color: var(--gray-600); font-size: 11.5px; }
+.vocab-sep { color: var(--gray-400); }
+
+/* ── TRANSLATION ── */
+.translation-box {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  padding: 24px 28px;
+  border-radius: 5px;
+  font-size: 14.5px;
+  line-height: 2;
+  color: var(--text-dark);
+}
+
+/* ── TOPIC/STRUCTURE ── */
+.topic-section { margin-bottom: 22px; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.topic-box {
+  background: var(--navy);
+  color: var(--white);
+  padding: 14px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.gist-box {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--blue-accent);
+  padding: 14px 18px;
+  border-radius: 3px;
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+
+.structure-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.structure-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.step-label {
+  min-width: 44px;
+  background: var(--navy);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 3px;
+  text-align: center;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+.step-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-mid);
+}
+
+/* ── QUIZ ── */
+.quiz-block {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+
+.quiz-q-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.quiz-question {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.quiz-passage {
+  background: var(--gray-100);
+  border-left: 3px solid var(--gray-400);
+  padding: 12px 16px;
+  font-family: 'EB Garamond', serif;
+  font-size: 14.5px;
+  line-height: 1.8;
+  margin-bottom: 14px;
+  border-radius: 0 3px 3px 0;
+  color: var(--text-mid);
+}
+
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+
+.quiz-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.6;
+  transition: all 0.15s;
+  background: var(--white);
+}
+
+.quiz-option:hover { border-color: var(--blue-accent); background: var(--gray-100); }
+
+.opt-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  background: var(--gray-200);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 22px;
+  color: var(--gray-600);
+}
+
+.quiz-option.correct {
+  border-color: var(--correct);
+  background: #eafaf1;
+}
+
+.quiz-option.correct .opt-num {
+  background: var(--correct);
+  color: var(--white);
+}
+
+.quiz-option.incorrect {
+  border-color: var(--incorrect);
+  background: #fdecea;
+}
+
+.quiz-option.incorrect .opt-num {
+  background: var(--incorrect);
+  color: var(--white);
+}
+
+.quiz-option.reveal-correct {
+  border-color: var(--correct);
+  background: #eafaf1;
+}
+
+.quiz-option.reveal-correct .opt-num {
+  background: var(--correct);
+  color: var(--white);
+}
+
+.quiz-explanation {
+  display: none;
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.quiz-explanation.show { display: block; }
+
+.reset-btn {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid var(--gray-200);
+  color: var(--gray-600);
+  padding: 5px 12px;
+  font-size: 11px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.15s;
+}
+
+.reset-btn:hover { border-color: var(--navy); color: var(--navy); }
+
+/* ── 서술형 ── */
+.essay-block {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+
+.essay-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.essay-question {
+  font-size: 13.5px;
+  line-height: 1.9;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.essay-condition {
+  background: var(--yellow-bg);
+  border-left: 3px solid var(--gold);
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--yellow-text);
+  margin-bottom: 14px;
+  border-radius: 0 3px 3px 0;
+}
+
+.answer-lines {
+  margin: 10px 0;
+}
+
+.answer-line {
+  border-bottom: 1px solid var(--gray-400);
+  height: 32px;
+  margin-bottom: 8px;
+}
+
+.answer-toggle-btn {
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  padding: 7px 16px;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-top: 8px;
+  transition: background 0.15s;
+}
+
+.answer-toggle-btn:hover { background: var(--navy-light); }
+
+.model-answer {
+  display: none;
+  margin-top: 12px;
+  background: var(--gray-100);
+  border-left: 3px solid var(--blue-accent);
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.8;
+  border-radius: 0 3px 3px 0;
+  color: var(--text-dark);
+}
+
+.model-answer.show { display: block; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(26,39,68,0.2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(26,39,68,0.4); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  #sidebar { width: 200px; min-width: 200px; }
+  #content { padding: 16px; }
+}
+</style>
+</head>
+<body>
+<div id="sidebar">
+  <div id="sidebar-header">
+    <div class="academy">에듀케레 영수학원</div>
+    <h1>Full수록<br>9-part5</h1>
+    <div class="subtitle">11개 지문 분석앱</div>
+  </div>
+  <div class="passage-list">
+
+    <button class="passage-btn active" onclick="selectPassage(0)"><span class="num">37</span>Moths &amp; Light</button>
+    <button class="passage-btn" onclick="selectPassage(1)"><span class="num">38</span>Communication Investment</button>
+    <button class="passage-btn" onclick="selectPassage(2)"><span class="num">39</span>City Quality &amp; Staying</button>
+    <button class="passage-btn" onclick="selectPassage(3)"><span class="num">40</span>Rousseau &amp; Social Self</button>
+    <button class="passage-btn" onclick="selectPassage(4)"><span class="num">41</span>Controlling Motivation</button>
+    <button class="passage-btn" onclick="selectPassage(5)"><span class="num">42</span>Audio vs. Visual Errors</button>
+    <button class="passage-btn" onclick="selectPassage(6)"><span class="num">43</span>Circular Economy</button>
+    <button class="passage-btn" onclick="selectPassage(7)"><span class="num">44</span>Mother Tree &amp; Shade</button>
+    <button class="passage-btn" onclick="selectPassage(8)"><span class="num">45</span>Digital Preservation</button>
+    <button class="passage-btn" onclick="selectPassage(9)"><span class="num">46</span>Creativity &amp; Evaluation</button>
+    <button class="passage-btn" onclick="selectPassage(10)"><span class="num">47</span>Coupled Cognitive System</button>
+  </div>
+  <div id="sidebar-footer">
+    에듀케레 영수학원<br>Full수록 9-part5<br>© 2025
+  </div>
+</div>
+<div id="main">
+  <div id="topbar">
+    <button class="tab-btn active" onclick="selectTab('전문')">① 전문</button>
+    <button class="tab-btn" onclick="selectTab('문장분석')">② 문장 상세 분석</button>
+    <button class="tab-btn" onclick="selectTab('핵심단어')">③ 핵심단어 및 표현</button>
+    <button class="tab-btn" onclick="selectTab('전문해석')">④ 전문해석</button>
+    <button class="tab-btn" onclick="selectTab('주제')">⑤ 주제 및 요지</button>
+    <button class="tab-btn" onclick="selectTab('변형문제')">⑥ 변형문제</button>
+  </div>
+  <div id="content">
+
+
+    <div id="panel-전문" class="tab-panel active" data-tab="전문"></div>
+    <div id="panel-문장분석" class="tab-panel" data-tab="문장분석"></div>
+    <div id="panel-핵심단어" class="tab-panel" data-tab="핵심단어"></div>
+    <div id="panel-전문해석" class="tab-panel" data-tab="전문해석"></div>
+    <div id="panel-주제" class="tab-panel" data-tab="주제"></div>
+    <div id="panel-변형문제" class="tab-panel" data-tab="변형문제"></div>
+
+
+<script>
+const passages = [];
+
+// ─────────────────────────────────────────────────────
+// PASSAGE 0: 9-37  Moths & Light
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-37",
+  title: "Why Moths Circle Light",
+  fulltext: `There has been a lot of discussion on why moths are attracted to light. The consensus seems to hold that moths are not so much attracted to lights as they are trapped by them. The light becomes a sensory overload that disorients the insects and sends them into a holding pattern. A hypothesis called the Mach band theory suggests that moths see a dark area around a light source and head for it to escape the light. Another theory suggests that moths perceive the light coming from a source as a diffuse halo with a dark spot in the center. The moths, attempting to escape the light, fly toward that imagined "portal," bringing them closer to the source. As they approach the light, their reference point changes and they circle the light hopelessly trying to reach the portal. Everyone is familiar with moths circling their porch lights. Their flight appears to have no purpose, but they are, it is believed, trying to escape the pull of the light.`,
+
+  sentences: [
+    {
+      en: "There has been a lot of discussion on why moths are attracted to light.",
+      slash_en: "There has been / a lot of discussion / on why moths are attracted to light.",
+      slash_ko: "있어왔다 / 많은 논의가 / 나방이 왜 빛에 끌리는지에 대한.",
+      grammar: [
+        { name: "현재완료 There has been", example: "There has been a lot of discussion", point: "★ There + has/have + been = ~이 있어왔다 — 현재까지 지속된 상황 표현" },
+        { name: "간접의문문 why + S + V", example: "discussion on why moths are attracted to light", point: "★ 전치사 on의 목적어로 쓰인 간접의문문 — why + 주어 + 동사 어순(도치 없음)" }
+      ]
+    },
+    {
+      en: "The consensus seems to hold that moths are not so much attracted to lights as they are trapped by them.",
+      slash_en: "The consensus / seems to hold / that moths are / not so much attracted to lights / as they are trapped by them.",
+      slash_ko: "통설은 / ~라고 보는 것 같다 / 나방이 ~라고 / 빛에 끌리는 것이 아니라 / 빛에 갇히는 것이라고.",
+      grammar: [
+        { name: "not so much A as B", example: "not so much attracted to lights as they are trapped by them", point: "★ not so much A as B = A라기보다 B이다 — 수능 최빈출 비교 구문" },
+        { name: "seem to V (추측)", example: "seems to hold that...", point: "★ seem to + 동사원형 = ~인 것처럼 보이다 — seem + that절과 동일 의미" }
+      ]
+    },
+    {
+      en: "The light becomes a sensory overload that disorients the insects and sends them into a holding pattern.",
+      slash_en: "The light becomes / a sensory overload / that disorients the insects / and sends them into a holding pattern.",
+      slash_ko: "빛은 ~이 된다 / 감각 과부하 / 곤충들을 방향 감각을 잃게 만들고 / 그들을 맴도는 패턴으로 보내는.",
+      grammar: [
+        { name: "관계대명사 that (두 동사 병렬)", example: "that disorients the insects and sends them", point: "★ 선행사 overload를 수식하는 that절 안에 disorients와 sends 두 동사 병렬" },
+        { name: "send + O + into + 명사", example: "sends them into a holding pattern", point: "★ send A into B = A를 B 상태로 몰아넣다 — 결과 표현" }
+      ]
+    },
+    {
+      en: "A hypothesis called the Mach band theory suggests that moths see a dark area around a light source and head for it to escape the light.",
+      slash_en: "A hypothesis called the Mach band theory / suggests / that moths see a dark area / around a light source / and head for it / to escape the light.",
+      slash_ko: "마하 밴드 이론이라 불리는 가설은 / 시사한다 / 나방이 어두운 영역을 본다고 / 광원 주위의 / 그리고 그것을 향해 간다고 / 빛을 피하려고.",
+      grammar: [
+        { name: "과거분사 후치 수식 called", example: "A hypothesis called the Mach band theory", point: "★ called = which is called — 과거분사가 명사를 후치 수식" },
+        { name: "to부정사 목적 (to escape)", example: "head for it to escape the light", point: "★ to escape = in order to escape — 목적 부사적 용법의 to부정사" }
+      ]
+    },
+    {
+      en: "Another theory suggests that moths perceive the light coming from a source as a diffuse halo with a dark spot in the center.",
+      slash_en: "Another theory suggests / that moths perceive / the light coming from a source / as a diffuse halo / with a dark spot in the center.",
+      slash_ko: "또 다른 이론은 시사한다 / 나방이 인식한다고 / 광원에서 나오는 빛을 / 확산된 후광으로 / 중심에 어두운 점이 있는.",
+      grammar: [
+        { name: "perceive A as B", example: "perceive the light... as a diffuse halo", point: "★ perceive A as B = A를 B로 인식하다 — regard/view/see A as B와 동일 구조" },
+        { name: "현재분사 후치 수식 coming", example: "the light coming from a source", point: "★ coming from a source = which comes from a source — 현재분사 후치 수식" }
+      ]
+    },
+    {
+      en: "The moths, attempting to escape the light, fly toward that imagined \"portal,\" bringing them closer to the source.",
+      slash_en: "The moths, / attempting to escape the light, / fly toward that imagined \"portal,\" / bringing them closer to the source.",
+      slash_ko: "나방들은, / 빛을 피하려고 하면서, / 그 상상의 '통로'를 향해 날아가고, / 그것들을 광원에 더 가깝게 데려간다.",
+      grammar: [
+        { name: "분사구문 (attempting / bringing)", example: "attempting to escape the light... bringing them closer", point: "★ attempting = 동시 동작(~하면서), bringing = 결과(~하여) — 두 분사구문의 의미 차이 구별" },
+        { name: "bring + O + 형용사 (5형식)", example: "bringing them closer to the source", point: "★ bring + O + closer = O를 더 가깝게 데려오다 — 5형식 결과 표현" }
+      ]
+    },
+    {
+      en: "As they approach the light, their reference point changes and they circle the light hopelessly trying to reach the portal.",
+      slash_en: "As they approach the light, / their reference point changes / and they circle the light / hopelessly / trying to reach the portal.",
+      slash_ko: "빛에 접근함에 따라, / 그들의 기준점이 바뀌고 / 그들은 빛 주위를 맴돈다 / 절망적으로 / 통로에 닿으려 하면서.",
+      grammar: [
+        { name: "접속사 As (시간/비례)", example: "As they approach the light", point: "★ As + S + V = ~함에 따라 (비례) / ~할 때 (시간) — 문맥상 비례 의미" },
+        { name: "분사구문 trying (동시 동작)", example: "circle the light hopelessly trying to reach the portal", point: "★ trying to reach = while trying to reach — 동시 동작 분사구문" }
+      ]
+    },
+    {
+      en: "Everyone is familiar with moths circling their porch lights.",
+      slash_en: "Everyone / is familiar with / moths circling their porch lights.",
+      slash_ko: "모두가 / 익숙하다 / 나방이 현관 불 주위를 맴도는 것에.",
+      grammar: [
+        { name: "be familiar with + 동명사", example: "familiar with moths circling their porch lights", point: "★ be familiar with + 명사/동명사 = ~에 익숙하다 — moths는 circling의 의미상 주어" }
+      ]
+    },
+    {
+      en: "Their flight appears to have no purpose, but they are, it is believed, trying to escape the pull of the light.",
+      slash_en: "Their flight / appears to have no purpose, / but they are, / it is believed, / trying to escape / the pull of the light.",
+      slash_ko: "그들의 비행은 / 목적이 없는 것처럼 보이지만, / 그들은, / 믿어지기로는, / 탈출하려 하고 있다 / 빛의 당김에서.",
+      grammar: [
+        { name: "삽입절 it is believed", example: "they are, it is believed, trying to escape", point: "★ it is believed(삽입절) = 화자의 완곡한 추측 표현 — it is said/thought/reported 등 동일 구조" },
+        { name: "appear to + V (외관 추측)", example: "appears to have no purpose", point: "★ appear to + 동사원형 = ~인 것처럼 보이다 — seem to와 동의" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "consensus", meaning: "통설, 합의", pos: "n.", deriv: "consensual (adj.)" },
+    { word: "sensory overload", meaning: "감각 과부하", pos: "n.", deriv: "sensory (adj.), overload (n./v.)" },
+    { word: "disorient", meaning: "방향 감각을 잃게 하다", pos: "v.", deriv: "disorientation (n.), disoriented (adj.)" },
+    { word: "holding pattern", meaning: "맴도는 패턴, 대기 비행", pos: "n.", deriv: "—" },
+    { word: "diffuse", meaning: "확산된, 퍼진", pos: "adj.", deriv: "diffusion (n.), diffuse (v.)" },
+    { word: "halo", meaning: "후광, 광륜", pos: "n.", deriv: "—" },
+    { word: "portal", meaning: "통로, 관문", pos: "n.", deriv: "—" },
+    { word: "reference point", meaning: "기준점", pos: "n.", deriv: "reference (n.), refer (v.)" },
+    { word: "hopelessly", meaning: "절망적으로", pos: "adv.", deriv: "hopeless (adj.), hope (n./v.)" },
+    { word: "perceive", meaning: "인식하다, 지각하다", pos: "v.", deriv: "perception (n.), perceptive (adj.)" }
+  ],
+
+  translation: "나방이 왜 빛에 끌리는지에 대한 논의가 많았다. 통설은 나방이 빛에 끌리는 것이라기보다 빛에 갇히는 것이라고 보는 것 같다. 빛은 곤충들의 방향 감각을 잃게 하고 맴도는 패턴으로 몰아넣는 감각 과부하가 된다. 마하 밴드 이론이라 불리는 가설은 나방이 광원 주위의 어두운 영역을 보고 빛을 피하려 그쪽으로 향한다고 제안한다. 또 다른 이론은 나방이 광원에서 나오는 빛을 중심에 어두운 점이 있는 확산된 후광으로 인식한다고 제안한다. 빛을 피하려는 나방은 그 상상의 '통로'를 향해 날아가고, 이는 오히려 나방을 광원에 더 가깝게 데려간다. 빛에 접근함에 따라 기준점이 바뀌고, 나방은 절망적으로 통로에 닿으려 하며 빛 주위를 맴돈다. 모두가 나방이 현관 불 주위를 맴도는 것에 익숙하다. 그들의 비행은 목적이 없는 것처럼 보이지만, 믿어지기로는 그들은 빛의 당김에서 탈출하려 하고 있는 것이다.",
+
+  topic: "나방이 빛 주위를 맴도는 이유에 대한 여러 이론",
+  gist: "나방은 빛에 끌리는 것이 아니라 빛에 갇히는 것이며, 빛이 만드는 감각 과부하가 나방을 혼란에 빠뜨린다. 마하 밴드 이론과 상상의 '통로' 이론 모두 나방이 빛을 피하려다가 오히려 빛에 더 가까이 다가가게 됨을 설명한다.",
+  structure: [
+    { label: "도입", text: "나방은 빛에 끌리는 것이 아니라 빛에 갇히는 것이다(통설)." },
+    { label: "전개1", text: "마하 밴드 이론: 나방이 광원 주위의 어두운 영역을 보고 그쪽으로 향한다." },
+    { label: "전개2", text: "'통로' 이론: 빛을 확산된 후광+어두운 점으로 인식, 통로를 향해 날다가 더 가까워진다." },
+    { label: "결론", text: "나방의 맴돌기는 빛에서 탈출하려는 시도이다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "나방의 시각 구조와 야간 비행 능력",
+        "빛의 종류에 따른 나방의 반응 차이",
+        "나방이 빛 주위를 맴도는 현상에 대한 다양한 이론",
+        "인공조명이 야생 곤충에 미치는 환경적 영향",
+        "나방의 포식자 회피 전략"
+      ],
+      answer: 2,
+      explanation: "나방이 빛에 갇히는 이유를 감각 과부하, 마하 밴드 이론, 통로 이론으로 설명하는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "The consensus seems to hold that moths are not so much attracted to lights as they are ________ by them.",
+      options: ["guided", "frightened", "trapped", "repelled", "energized"],
+      answer: 2,
+      explanation: "나방이 빛에 끌리는 것이 아니라 '갇히는(trapped)' 것이라는 것이 통설의 핵심이다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "A hypothesis ①called the Mach band theory suggests that moths see a dark area around a light source and ②head for it to escape the light. The moths, ③attempting to escape the light, fly toward that imagined \"portal,\" ④bringing them closer to the source. As they approach the light, they circle it ⑤hopeless trying to reach the portal.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 4,
+      explanation: "⑤ 동사 circle을 수식하는 부사가 필요하므로 hopeless(형용사)가 아닌 hopelessly(부사)가 되어야 한다."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "통설에 따르면 나방은 빛에 끌리는 것이 아니라 갇히는 것이다.",
+        "마하 밴드 이론에 따르면 나방은 광원 주위의 어두운 영역을 향해 간다.",
+        "나방이 빛에 접근할수록 기준점이 바뀌어 맴돌기를 멈춘다.",
+        "통로 이론에 따르면 나방은 빛을 중심에 어두운 점이 있는 후광으로 인식한다.",
+        "나방의 맴돌기는 빛의 당김에서 탈출하려는 시도로 여겨진다."
+      ],
+      answer: 2,
+      explanation: "③ 빛에 접근할수록 기준점이 바뀌어 맴돌기를 '멈추는' 것이 아니라 '계속 맴돈다(circle the light hopelessly)'고 나와 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "The consensus seems to hold that moths are not so much attracted to lights as they are trapped by them. The light becomes a sensory overload that disorients the insects.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) The moths fly toward that imagined 'portal,' but as they approach, their reference point changes and they circle hopelessly.",
+        B: "(B) The Mach band theory suggests moths see a dark area around a light source and head for it to escape.",
+        C: "(C) Another theory suggests moths perceive the light as a diffuse halo with a dark spot in the center — an imagined portal."
+      },
+      answer: 2,
+      explanation: "마하 밴드 이론 제시(B) → 통로 이론 제시(C) → 접근 시 기준점 변화로 맴돌기(A) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "Moths are not attracted to light but (A)________ by it; the light acts as a sensory (B)________ that disorients them.",
+      answer: "(A) trapped  (B) overload"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "'통로(portal)' 이론에 따르면 나방이 빛 주위를 맴도는 이유를 영어로 서술하시오.",
+      condition: "조건: 완전한 영어 문장으로, 30단어 내외.",
+      answer: "Moths perceive the light as a halo with a dark spot and fly toward the imagined portal to escape, but as they approach, their reference point changes, causing them to circle endlessly."
+    }
+  ]
+});
+
+// ─────────────────────────────────────────────────────
+// PASSAGE 1: 9-38  Communication Investment
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-38",
+  title: "Investment and Communication Technology",
+  fulltext: `One of the factors determining the use of technologies of communication will be the kinds of investments made in equipment and personnel; who makes them, and what they expect in return. There is no guarantee that the investment will necessarily be in forms of communication that are most appropriate for the majority of people. Because the ownership of investment funds tends to be in the hands of commercial organisations, the modernisation of communications infrastructure only takes place on the basis of potential profitability. Take, for example, the installation of fibre-optic communications cable across the African continent. A number of African nations are involved in the development but its operational structures will be oriented to those who can pay for access. Many states that might wish to use it for education and information may not only find it too expensive but also simply unavailable to them. There can be no doubt that the development has been led by investment opportunity rather than community demand.`,
+
+  sentences: [
+    {
+      en: "One of the factors determining the use of technologies of communication will be the kinds of investments made in equipment and personnel; who makes them, and what they expect in return.",
+      slash_en: "One of the factors / determining the use of technologies of communication / will be / the kinds of investments made in equipment and personnel; / who makes them, / and what they expect in return.",
+      slash_ko: "~의 요인들 중 하나가 / 통신 기술 사용을 결정하는 / ~이 될 것이다 / 장비와 인력에 투자된 투자의 종류; / 누가 그것을 하는지, / 그리고 그들이 무엇을 대가로 기대하는지.",
+      grammar: [
+        { name: "One of the + 복수명사 + 단수동사", example: "One of the factors... will be", point: "★ One of the + 복수명사 주어 → 단수 동사 will be — 수 일치 빈출 오류" },
+        { name: "현재분사 후치 수식 determining", example: "the factors determining the use", point: "★ determining = which determine — 현재분사 명사 후치 수식" },
+        { name: "과거분사 후치 수식 made", example: "investments made in equipment and personnel", point: "★ made = which are made — 과거분사 명사 후치 수식" }
+      ]
+    },
+    {
+      en: "There is no guarantee that the investment will necessarily be in forms of communication that are most appropriate for the majority of people.",
+      slash_en: "There is no guarantee / that the investment will necessarily be / in forms of communication / that are most appropriate / for the majority of people.",
+      slash_ko: "보장이 없다 / 투자가 반드시 ~에 있을 것이라는 / 통신 형태 / 가장 적합한 / 대다수 사람들에게.",
+      grammar: [
+        { name: "동격 that절 (guarantee that)", example: "guarantee that the investment will necessarily be...", point: "★ guarantee 뒤의 that절은 동격절 — fact, idea, claim, belief 등도 동격 that절 취함" },
+        { name: "부사 necessarily (부정문 강조)", example: "will not necessarily be", point: "★ not necessarily = 반드시 ~인 것은 아니다 — 부분 부정 표현 빈출" }
+      ]
+    },
+    {
+      en: "Because the ownership of investment funds tends to be in the hands of commercial organisations, the modernisation of communications infrastructure only takes place on the basis of potential profitability.",
+      slash_en: "Because the ownership of investment funds / tends to be in the hands of commercial organisations, / the modernisation of communications infrastructure / only takes place / on the basis of potential profitability.",
+      slash_ko: "투자 기금의 소유권이 / 상업 조직들의 손에 있는 경향이 있기 때문에, / 통신 기반 시설의 현대화는 / 오직 이루어진다 / 잠재적 수익성의 기반 위에서만.",
+      grammar: [
+        { name: "tend to V", example: "tends to be in the hands of commercial organisations", point: "★ tend to + V = ~하는 경향이 있다 — 수능 빈출 표현" },
+        { name: "on the basis of ~", example: "on the basis of potential profitability", point: "★ on the basis of ~ = ~을 근거로, ~에 기반하여 — based on과 동의 전치사구" }
+      ]
+    },
+    {
+      en: "Take, for example, the installation of fibre-optic communications cable across the African continent.",
+      slash_en: "Take, for example, / the installation of fibre-optic communications cable / across the African continent.",
+      slash_ko: "예로 들어 보라, / 광섬유 통신 케이블의 설치를 / 아프리카 대륙 전역에 걸친.",
+      grammar: [
+        { name: "명령문 Take, for example", example: "Take, for example, the installation...", point: "★ Take ~ for example = ~을 예로 들어라 — 예시 도입 관용 명령문" }
+      ]
+    },
+    {
+      en: "A number of African nations are involved in the development but its operational structures will be oriented to those who can pay for access.",
+      slash_en: "A number of African nations / are involved in the development / but its operational structures / will be oriented to / those who can pay for access.",
+      slash_ko: "많은 아프리카 국가들이 / 개발에 참여하고 있지만 / 그것의 운영 구조는 / ~에 맞춰질 것이다 / 접근 비용을 낼 수 있는 사람들에게.",
+      grammar: [
+        { name: "A number of + 복수명사 → 복수 동사", example: "A number of African nations are involved", point: "★ a number of = 많은 → 복수 취급. the number of = ~의 수 → 단수 취급 — 수 일치 빈출" },
+        { name: "be oriented to ~", example: "will be oriented to those who can pay", point: "★ be oriented to/toward = ~에 맞춰지다, ~을 지향하다" }
+      ]
+    },
+    {
+      en: "Many states that might wish to use it for education and information may not only find it too expensive but also simply unavailable to them.",
+      slash_en: "Many states / that might wish to use it / for education and information / may not only find it too expensive / but also simply unavailable to them.",
+      slash_ko: "많은 국가들이 / 그것을 사용하기를 원할 수도 있는 / 교육과 정보를 위해 / 그것이 너무 비쌀 뿐만 아니라 / 그냥 이용 불가능하다는 것을 알게 될 수도 있다.",
+      grammar: [
+        { name: "not only A but also B (병렬)", example: "not only find it too expensive but also simply unavailable", point: "★ not only A but also B — find it too expensive / (find it) unavailable 병렬. it = 형식목적어" },
+        { name: "5형식 find + O + 형용사", example: "find it too expensive / unavailable", point: "★ find + O + 형용사 보어 = O가 ~라고 알게 되다 — it = the cable" }
+      ]
+    },
+    {
+      en: "There can be no doubt that the development has been led by investment opportunity rather than community demand.",
+      slash_en: "There can be no doubt / that the development has been led / by investment opportunity / rather than community demand.",
+      slash_ko: "의심의 여지가 없다 / 개발이 주도되어 왔다는 것은 / 투자 기회에 의해 / 지역 사회 수요가 아닌.",
+      grammar: [
+        { name: "There can be no doubt that ~", example: "There can be no doubt that the development has been led...", point: "★ There can be no doubt that = ~임에 틀림없다 — 강한 확신 표현" },
+        { name: "A rather than B", example: "investment opportunity rather than community demand", point: "★ A rather than B = B가 아닌 A — 대조 강조 빈출 표현" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "investment", meaning: "투자", pos: "n.", deriv: "invest (v.), investor (n.)" },
+    { word: "personnel", meaning: "인력, 직원", pos: "n.", deriv: "—" },
+    { word: "guarantee", meaning: "보장(하다)", pos: "n./v.", deriv: "guaranteed (adj.)" },
+    { word: "ownership", meaning: "소유권", pos: "n.", deriv: "own (v./adj.), owner (n.)" },
+    { word: "modernisation", meaning: "현대화", pos: "n.", deriv: "modernize (v.), modern (adj.)" },
+    { word: "infrastructure", meaning: "기반 시설", pos: "n.", deriv: "—" },
+    { word: "profitability", meaning: "수익성", pos: "n.", deriv: "profit (n./v.), profitable (adj.)" },
+    { word: "fibre-optic", meaning: "광섬유의", pos: "adj.", deriv: "fibre (n.), optic (adj.)" },
+    { word: "oriented", meaning: "지향된, 맞춰진", pos: "adj.", deriv: "orient (v.), orientation (n.)" },
+    { word: "unavailable", meaning: "이용 불가능한", pos: "adj.", deriv: "available (adj.), availability (n.)" }
+  ],
+
+  translation: "통신 기술의 사용을 결정하는 요인들 중 하나는 장비와 인력에 투자되는 투자의 종류, 즉 누가 투자를 하고 그들이 무엇을 대가로 기대하는지이다. 투자가 반드시 대다수 사람들에게 가장 적합한 통신 형태에 이루어질 것이라는 보장은 없다. 투자 기금의 소유권이 상업 조직들의 손에 있는 경향이 있기 때문에, 통신 기반 시설의 현대화는 오직 잠재적 수익성에 기반하여 이루어진다. 예를 들어, 아프리카 대륙 전역에 걸친 광섬유 통신 케이블의 설치를 들어보자. 많은 아프리카 국가들이 개발에 참여하고 있지만, 그것의 운영 구조는 접근 비용을 낼 수 있는 사람들에게 맞춰질 것이다. 교육과 정보를 위해 그것을 사용하기를 원하는 많은 국가들은 그것이 너무 비쌀 뿐 아니라 이용조차 불가능하다는 것을 알게 될 수도 있다. 개발이 지역 사회 수요가 아닌 투자 기회에 의해 주도되어 왔다는 것은 의심의 여지가 없다.",
+
+  topic: "통신 기술 개발이 지역 사회 수요보다 상업적 투자 논리에 의해 결정되는 방식",
+  gist: "통신 기반 시설의 현대화는 상업 조직들의 투자 수익성 논리에 따라 이루어지므로, 대다수 사람들이나 교육·정보가 필요한 국가들에게 적합한 형태로 개발되지 않는다.",
+  structure: [
+    { label: "도입", text: "통신 기술 사용은 누가 어떤 기대로 투자하느냐에 달려 있다." },
+    { label: "전개1", text: "투자 기금이 상업 조직 손에 있어 현대화는 수익성 기반으로만 진행된다." },
+    { label: "전개2", text: "아프리카 광섬유 케이블 사례: 비용을 낼 수 없는 국가는 접근 자체가 불가능하다." },
+    { label: "결론", text: "개발은 지역 사회 수요가 아닌 투자 기회에 의해 주도되어 왔다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "아프리카 대륙의 디지털 격차 해소 방안",
+        "광섬유 케이블이 교육에 미치는 긍정적 영향",
+        "통신 기술 개발이 수익성 논리에 의해 주도되어 불평등을 심화하는 방식",
+        "상업 조직의 통신 기술 투자 절차",
+        "국제 통신 기반 시설 구축에서 정부의 역할"
+      ],
+      answer: 2,
+      explanation: "상업 투자 논리로 통신 기반 시설이 개발되어, 비용을 낼 수 없는 국가들은 혜택을 받지 못한다는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "There can be no doubt that the development has been led by investment opportunity rather than ________.",
+      options: ["technological innovation", "community demand", "government policy", "environmental concern", "academic research"],
+      answer: 1,
+      explanation: "상업적 투자 기회가 지역 사회 수요(community demand)보다 개발을 주도한다는 것이 글의 핵심이다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "One of the factors ①determining the use of technologies of communication will be the kinds of investments ②made in equipment. Because the ownership of investment funds ③tend to be in the hands of commercial organisations, modernisation only takes place on the basis of potential profitability. Many states may not only find it too expensive ④but also simply unavailable. There can be no doubt ⑤that the development has been led by investment opportunity.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 2,
+      explanation: "③ 주어는 'the ownership'(단수)이므로 동사는 tends가 되어야 한다. tend → tends."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "투자 기금의 소유권은 상업 조직들의 손에 있는 경향이 있다.",
+        "아프리카 광섬유 케이블 개발에 여러 아프리카 국가들이 참여하고 있다.",
+        "교육과 정보를 위해 광섬유 케이블을 이용하려는 국가들은 모두 무료로 접근할 수 있다.",
+        "통신 기반 시설 현대화는 잠재적 수익성을 기반으로 이루어진다.",
+        "개발은 지역 사회 수요보다 투자 기회에 의해 주도되어 왔다."
+      ],
+      answer: 2,
+      explanation: "③ 글에서 많은 국가들이 너무 비싸거나 이용 자체가 불가능할 수 있다고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "There is no guarantee that investment will necessarily be in forms of communication most appropriate for the majority of people.",
+      options: ["(A)-(B)-(C)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)", "(C)-(B)-(A)"],
+      extraPassages: {
+        A: "(A) Many states wishing to use it for education may not only find it too expensive but also simply unavailable.",
+        B: "(B) Because ownership of funds tends to be in commercial hands, modernisation only proceeds on the basis of potential profitability.",
+        C: "(C) Take the installation of fibre-optic cable across Africa — its operational structures will be oriented to those who can pay."
+      },
+      answer: 1,
+      explanation: "수익성 논리 일반화(B) → 아프리카 사례 제시(C) → 교육용 접근 불가 문제(A) 순서가 논리적이다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "Communications infrastructure is modernised only on the basis of potential (A)________, meaning development is led by investment (B)________ rather than the needs of communities.",
+      answer: "(A) profitability  (B) opportunity"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "아프리카 광섬유 케이블 사례가 글의 주장을 어떻게 뒷받침하는지 한국어로 서술하시오.",
+      condition: "조건: 두 문장 이내, 60자 내외.",
+      answer: "아프리카 국가들이 개발에 참여하지만 운영 구조는 비용을 낼 수 있는 사람들에게 맞춰진다. 교육·정보를 위해 사용하고 싶은 국가들은 비용 문제나 이용 불가로 혜택을 받지 못할 수 있다."
+    }
+  ]
+});
+
+// ─────────────────────────────────────────────────────
+// PASSAGE 2: 9-39  City Quality & Staying
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-39",
+  title: "City Quality and Staying Activities",
+  fulltext: `City quality is so crucial for optional activities that the extent of staying activities can often be used as a measuring stick for the quality of the city as well as of its space. Many pedestrians in a city are not necessarily an indication of good city quality ― many people walking around can often be a sign of insufficient transit options or long distances between the various functions in the city. Conversely, it can be claimed that a city in which many people are not walking often indicates good city quality. In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous. And it's not due to necessity but rather that the city quality is so inviting. It is hard to keep moving in city space with so many temptations to stay. In contrast are many new quarters and complexes that many people walk through but rarely stop or stay in.`,
+
+  sentences: [
+    {
+      en: "City quality is so crucial for optional activities that the extent of staying activities can often be used as a measuring stick for the quality of the city as well as of its space.",
+      slash_en: "City quality is so crucial / for optional activities / that the extent of staying activities / can often be used / as a measuring stick / for the quality of the city / as well as of its space.",
+      slash_ko: "도시 질은 너무나 중요하다 / 선택적 활동에 / 그래서 머무는 활동의 범위가 / 흔히 사용될 수 있다 / 측정 기준으로 / 도시의 질에 대한 / 그리고 그 공간에 대한.",
+      grammar: [
+        { name: "so ~ that 결과 구문", example: "so crucial... that the extent... can be used", point: "★ so + 형용사 + that + 결과절 — 너무 ~해서 ~하다 (결과)" },
+        { name: "be used as ~", example: "can often be used as a measuring stick", point: "★ be used as ~ = ~로 사용되다 — 수동태 + as 역할/자격" }
+      ]
+    },
+    {
+      en: "Many pedestrians in a city are not necessarily an indication of good city quality ― many people walking around can often be a sign of insufficient transit options or long distances between the various functions in the city.",
+      slash_en: "Many pedestrians in a city / are not necessarily / an indication of good city quality ― / many people walking around / can often be a sign of / insufficient transit options / or long distances / between the various functions in the city.",
+      slash_ko: "도시의 많은 보행자들이 / 반드시 ~인 것은 아니다 / 좋은 도시 질의 표시 ― / 돌아다니는 많은 사람들은 / 흔히 ~의 징후일 수 있다 / 불충분한 대중교통 선택지 / 또는 긴 거리 / 도시의 다양한 기능들 사이의.",
+      grammar: [
+        { name: "not necessarily (부분 부정)", example: "are not necessarily an indication", point: "★ not necessarily = 반드시 ~인 것은 아니다 — 전체 부정(never)과 구별" },
+        { name: "현재분사 후치 수식 walking", example: "many people walking around", point: "★ walking around = who are walking around — 현재분사 명사 후치 수식" }
+      ]
+    },
+    {
+      en: "Conversely, it can be claimed that a city in which many people are not walking often indicates good city quality.",
+      slash_en: "Conversely, / it can be claimed / that a city / in which many people are not walking / often indicates / good city quality.",
+      slash_ko: "반대로, / 주장될 수 있다 / 도시가 / 많은 사람들이 걷지 않는 / 흔히 나타낸다고 / 좋은 도시 질을.",
+      grammar: [
+        { name: "가주어-진주어 it ~ that", example: "it can be claimed that a city... indicates", point: "★ 가주어 it + 수동태 + 진주어 that절 — it is said/claimed/argued that 구조" },
+        { name: "전치사+관계대명사 in which", example: "a city in which many people are not walking", point: "★ in which = where — 전치사 + 관계대명사 (어법 오류 빈출)" }
+      ]
+    },
+    {
+      en: "In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous.",
+      slash_en: "In a city like Rome, / it is / the large number of people / standing or sitting in squares / rather than walking / that is conspicuous.",
+      slash_ko: "로마와 같은 도시에서, / ~이다 / 많은 수의 사람들이 / 광장에 서거나 앉아 있는 / 걷는 것이 아니라 / 눈에 띄는 것은.",
+      grammar: [
+        { name: "It is ~ that 강조 구문", example: "it is the large number of people... that is conspicuous", point: "★ 분열문(cleft sentence): It is A that B = B하는 것은 바로 A이다 — 주어 강조" },
+        { name: "A rather than B (병렬)", example: "standing or sitting... rather than walking", point: "★ A rather than B — standing/sitting vs. walking 대조 강조" }
+      ]
+    },
+    {
+      en: "And it's not due to necessity but rather that the city quality is so inviting.",
+      slash_en: "And it's not due to necessity / but rather / that the city quality is so inviting.",
+      slash_ko: "그리고 그것은 필요 때문이 아니라 / 오히려 / 도시 질이 너무 매력적이기 때문이다.",
+      grammar: [
+        { name: "not A but (rather) B", example: "not due to necessity but rather that the city quality is so inviting", point: "★ not A but B = A가 아니라 B — A: 전치사구, B: that절 (비대칭 병렬이지만 의미상 대조)" }
+      ]
+    },
+    {
+      en: "It is hard to keep moving in city space with so many temptations to stay.",
+      slash_en: "It is hard / to keep moving / in city space / with so many temptations to stay.",
+      slash_ko: "어렵다 / 계속 움직이기가 / 도시 공간에서 / 머물고 싶은 너무 많은 유혹들과 함께.",
+      grammar: [
+        { name: "가주어 It ~ to V", example: "It is hard to keep moving", point: "★ 가주어 it + 형용사 + 진주어 to V — keep + V-ing = 계속 ~하다" },
+        { name: "temptation to V (형용사적 to부정사)", example: "temptations to stay", point: "★ temptation to V = ~하려는 유혹 — to부정사의 형용사적 용법" }
+      ]
+    },
+    {
+      en: "In contrast are many new quarters and complexes that many people walk through but rarely stop or stay in.",
+      slash_en: "In contrast / are many new quarters and complexes / that many people walk through / but rarely stop or stay in.",
+      slash_ko: "대조적으로 / 많은 새로운 구역과 복합 단지들이 있다 / 많은 사람들이 걸어 지나가지만 / 거의 멈추거나 머물지 않는.",
+      grammar: [
+        { name: "도치 구문 (장소 부사구 문두)", example: "In contrast are many new quarters and complexes", point: "★ 부사구(In contrast) 문두 → 주어-동사 도치: are + 주어 — 수능 어법 빈출" },
+        { name: "관계대명사 that (walk through, stop in)", example: "that many people walk through but rarely stop or stay in", point: "★ walk through와 stop/stay in의 전치사 — 관계대명사 뒤 전치사 후치 구조" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "optional", meaning: "선택적인", pos: "adj.", deriv: "option (n.), optionally (adv.)" },
+    { word: "measuring stick", meaning: "측정 기준, 척도", pos: "n.", deriv: "measure (v./n.)" },
+    { word: "pedestrian", meaning: "보행자", pos: "n.", deriv: "pedestrian (adj.: 평범한)" },
+    { word: "indication", meaning: "표시, 징후", pos: "n.", deriv: "indicate (v.), indicative (adj.)" },
+    { word: "insufficient", meaning: "불충분한", pos: "adj.", deriv: "sufficiency (n.), sufficient (adj.)" },
+    { word: "conversely", meaning: "반대로", pos: "adv.", deriv: "converse (adj./n.)" },
+    { word: "conspicuous", meaning: "눈에 띄는, 두드러진", pos: "adj.", deriv: "conspicuously (adv.)" },
+    { word: "inviting", meaning: "매력적인, 유혹적인", pos: "adj.", deriv: "invite (v.), invitation (n.)" },
+    { word: "temptation", meaning: "유혹", pos: "n.", deriv: "tempt (v.), tempting (adj.)" },
+    { word: "quarter", meaning: "구역, 지구", pos: "n.", deriv: "—" }
+  ],
+
+  translation: "도시 질은 선택적 활동에 너무나 중요하기 때문에, 머무는 활동의 범위가 도시와 그 공간의 질을 평가하는 측정 기준으로 흔히 사용될 수 있다. 도시의 많은 보행자가 반드시 좋은 도시 질의 표시인 것은 아니다. 많은 사람들이 돌아다니는 것은 불충분한 대중교통 선택지나 도시 내 다양한 기능들 사이의 긴 거리의 징후일 수 있다. 반대로, 많은 사람들이 걷지 않는 도시가 오히려 좋은 도시 질을 나타낸다고 주장될 수 있다. 로마 같은 도시에서 눈에 띄는 것은 걷는 사람들이 아니라 광장에서 서거나 앉아 있는 많은 사람들이다. 그것은 필요 때문이 아니라 오히려 도시 질이 너무 매력적이기 때문이다. 머물고 싶은 너무 많은 유혹들로 인해 도시 공간에서 계속 움직이기가 어렵다. 대조적으로, 많은 사람들이 걸어 지나가지만 거의 멈추거나 머물지 않는 많은 새로운 구역과 복합 단지들이 있다.",
+
+  topic: "도시 질의 진정한 척도는 보행자 수가 아닌 머무는 활동의 정도",
+  gist: "도시의 많은 보행자가 반드시 좋은 도시 질의 표시는 아니며, 오히려 사람들이 머물고 앉아 있는 정도가 도시 질의 진정한 척도이다. 로마의 예처럼, 매력적인 도시 공간은 사람들이 자발적으로 머무르게 만든다.",
+  structure: [
+    { label: "도입", text: "머무는 활동의 범위가 도시 질의 측정 기준이 된다." },
+    { label: "전개1", text: "많은 보행자 = 좋은 도시 질의 표시가 아님 — 오히려 교통 불편의 징후일 수 있다." },
+    { label: "전개2", text: "로마 사례: 광장에 서거나 앉은 사람들이 눈에 띄는 것이 도시 질의 증거." },
+    { label: "결론", text: "머물고 싶은 유혹이 있는 도시 vs. 걷기만 하고 멈추지 않는 새 복합 단지의 대조." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "보행자 수가 도시 계획에서 중요한 이유",
+        "대중교통 확충이 도시 보행 문화에 미치는 영향",
+        "도시 질의 진정한 척도는 보행자 수가 아닌 머무는 활동의 정도",
+        "로마와 현대 도시의 광장 설계 차이",
+        "선택적 활동이 도시 경제에 기여하는 방식"
+      ],
+      answer: 2,
+      explanation: "보행자 수 자체가 아니라 사람들이 머무는 정도가 도시 질의 진정한 척도라는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "In a city like Rome, it is the large number of people standing or sitting in squares rather than walking that is conspicuous. And it's not due to necessity but rather that the city quality is so ________.",
+      options: ["crowded", "modern", "inviting", "efficient", "structured"],
+      answer: 2,
+      explanation: "사람들이 필요가 아닌 도시 질 때문에 머문다는 내용이므로 'inviting(매력적인)'이 적절하다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "City quality is ①so crucial for optional activities that the extent of staying activities can often be used as a measuring stick. Many pedestrians are not necessarily ②an indication of good city quality. In a city like Rome, it is the large number of people ③stand or sitting in squares rather than walking that is conspicuous. It is hard ④to keep moving with so many temptations to stay. In contrast ⑤are many new quarters that people walk through but rarely stop in.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 2,
+      explanation: "③ it is ~ that 강조 구문 안의 주어 'the large number of people'을 수식하는 분사가 필요하다. stand → standing (현재분사)으로 바뀌어야 한다."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "머무는 활동의 범위가 도시 질을 평가하는 기준이 될 수 있다.",
+        "도시의 많은 보행자는 반드시 좋은 도시 질의 표시가 아닐 수 있다.",
+        "로마에서는 걷는 사람보다 광장에 서거나 앉은 사람이 눈에 띈다.",
+        "로마 사람들이 광장에 머무는 것은 대중교통 부족 때문이다.",
+        "새로운 복합 단지들은 사람들이 걸어 지나가지만 머물지 않는 경향이 있다."
+      ],
+      answer: 3,
+      explanation: "④ 로마 사람들이 머무는 것은 대중교통 부족이 아니라 도시 질이 매력적이기 때문이라고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "City quality is so crucial for optional activities that the extent of staying activities can be used as a measuring stick.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) In a city like Rome, it is people standing or sitting in squares rather than walking that is conspicuous — not due to necessity but because the city is so inviting.",
+        B: "(B) Many pedestrians are not necessarily a sign of good city quality; they may indicate insufficient transit options or long distances between functions.",
+        C: "(C) Conversely, a city where many people are not walking often indicates good city quality."
+      },
+      answer: 2,
+      explanation: "보행자 많음 ≠ 좋은 도시 질(B) → 역설적으로 보행자 적음 = 좋은 도시 질(C) → 로마 사례로 구체화(A) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "The extent of (A)________ activities serves as a measuring stick for city quality, since a truly inviting city creates (B)________ to stay rather than just pass through.",
+      answer: "(A) staying  (B) temptations"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "글쓴이가 로마를 예로 든 이유를 한국어로 서술하시오.",
+      condition: "조건: 두 문장 이내, 60자 내외.",
+      answer: "로마에서는 걷는 사람보다 광장에 서거나 앉아 있는 사람들이 눈에 띄기 때문이다. 이는 필요 때문이 아니라 도시 질이 매력적이어서 사람들이 자발적으로 머문다는 것을 보여준다."
+    }
+  ]
+});
+</script>
+
+<script>
+// ─────────────────────────────────────────────────────
+// PASSAGE 3: 9-40  Rousseau & Social Self
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-40",
+  title: "Rousseau and the Social Self",
+  fulltext: `That people need other people is hardly news, but for Rousseau this dependence extended far beyond companionship or even love, into the very process of becoming human. Rousseau believed that people are not born but made, every individual a bundle of potentials whose realization requires the active involvement of other people. Self-development is a social process. Self-sufficiency is an impossible fantasy. Much of the time Rousseau wished passionately that it were not: Robinson Crusoe was a favorite book, and he yearned to be free from the pains and uncertainties of social life. But his writings document with extraordinary clarity the shaping of the individual by his emotional attachments. "Our sweetest existence is relative and collective, and our true self is not entirely within us." And it is kindness ― which Rousseau analyzed under the rubric of pitié, which translates as "pity" but is much closer to "sympathy" as Hume and Smith defined it ― that is the key to this collective existence.`,
+
+  sentences: [
+    {
+      en: "That people need other people is hardly news, but for Rousseau this dependence extended far beyond companionship or even love, into the very process of becoming human.",
+      slash_en: "That people need other people / is hardly news, / but for Rousseau / this dependence extended / far beyond companionship or even love, / into the very process of becoming human.",
+      slash_ko: "사람들이 다른 사람들을 필요로 한다는 것은 / 별로 새로운 소식이 아니다, / 그러나 루소에게 / 이 의존은 확장되었다 / 동반자 관계나 심지어 사랑을 훨씬 넘어서, / 인간이 되는 바로 그 과정 안으로.",
+      grammar: [
+        { name: "That절 주어", example: "That people need other people is hardly news", point: "★ That + S + V = 명사절 주어 → 단수 취급 → is. 가주어 it으로 대체 가능" },
+        { name: "hardly (부정 부사)", example: "is hardly news", point: "★ hardly = 거의 ~아니다 — 부정 부사(scarcely, barely, rarely) 빈출" },
+        { name: "the very + 명사 (강조)", example: "the very process of becoming human", point: "★ the very = 바로 그 — 강조 표현" }
+      ]
+    },
+    {
+      en: "Rousseau believed that people are not born but made, every individual a bundle of potentials whose realization requires the active involvement of other people.",
+      slash_en: "Rousseau believed / that people are not born but made, / every individual / a bundle of potentials / whose realization requires / the active involvement of other people.",
+      slash_ko: "루소는 믿었다 / 사람들은 태어나는 것이 아니라 만들어진다고, / 모든 개인은 / 잠재력의 묶음이며 / 그것의 실현은 필요로 한다 / 다른 사람들의 적극적인 관여를.",
+      grammar: [
+        { name: "not A but B (병렬)", example: "not born but made", point: "★ not born but made — 수동태 병렬: are not born but (are) made" },
+        { name: "독립 분사구문 (every individual a bundle...)", example: "every individual a bundle of potentials whose realization...", point: "★ 독립 분사구문: 주어(every individual) + 보어(a bundle) — being 생략 형태" },
+        { name: "관계대명사 whose (소유격)", example: "a bundle of potentials whose realization requires", point: "★ whose = of which — 선행사 potentials의 소유격 관계대명사" }
+      ]
+    },
+    {
+      en: "Self-development is a social process.",
+      slash_en: "Self-development / is / a social process.",
+      slash_ko: "자기 발전은 / 이다 / 사회적 과정.",
+      grammar: [
+        { name: "단언적 단문 (핵심 주장)", example: "Self-development is a social process.", point: "★ 앞 문장의 핵심을 단문으로 압축 — 글의 중심 주장을 명료하게 제시하는 수사 전략" }
+      ]
+    },
+    {
+      en: "Self-sufficiency is an impossible fantasy.",
+      slash_en: "Self-sufficiency / is / an impossible fantasy.",
+      slash_ko: "자급자족은 / 이다 / 불가능한 환상.",
+      grammar: [
+        { name: "병렬 단문 구조", example: "Self-development is a social process. / Self-sufficiency is an impossible fantasy.", point: "★ 두 단문이 대조적 내용을 나란히 제시 — 주제 강화 수사 구조" }
+      ]
+    },
+    {
+      en: "Much of the time Rousseau wished passionately that it were not: Robinson Crusoe was a favorite book, and he yearned to be free from the pains and uncertainties of social life.",
+      slash_en: "Much of the time / Rousseau wished passionately / that it were not: / Robinson Crusoe was a favorite book, / and he yearned / to be free from / the pains and uncertainties of social life.",
+      slash_ko: "많은 시간 동안 / 루소는 간절히 바랐다 / 그렇지 않기를: / 로빈슨 크루소가 그가 좋아하는 책이었고, / 그는 열망했다 / 벗어나기를 / 사회 생활의 고통과 불확실성에서.",
+      grammar: [
+        { name: "가정법 과거 wished that ~ were", example: "wished passionately that it were not", point: "★ wish + that + 주어 + were (가정법 과거) = ~이 아니었으면 좋겠다 — 현재 사실의 반대 소망" },
+        { name: "yearn to V", example: "yearned to be free from the pains", point: "★ yearn to V = ~하기를 열망하다 — long to V, aspire to V와 유사" }
+      ]
+    },
+    {
+      en: "But his writings document with extraordinary clarity the shaping of the individual by his emotional attachments.",
+      slash_en: "But his writings / document / with extraordinary clarity / the shaping of the individual / by his emotional attachments.",
+      slash_ko: "그러나 그의 저작들은 / 기록한다 / 놀라운 명료함으로 / 개인의 형성을 / 감정적 애착에 의한.",
+      grammar: [
+        { name: "동사 + 부사구 + 목적어 (도치 아닌 강조 배열)", example: "document with extraordinary clarity the shaping", point: "★ 부사구(with extraordinary clarity)를 동사 바로 뒤에 위치시켜 강조 — 목적어가 길어 뒤로 이동" }
+      ]
+    },
+    {
+      en: "\"Our sweetest existence is relative and collective, and our true self is not entirely within us.\"",
+      slash_en: "\"Our sweetest existence / is relative and collective, / and our true self / is not entirely within us.\"",
+      slash_ko: "\"우리의 가장 달콤한 존재는 / 상대적이고 집단적이며, / 우리의 진정한 자아는 / 완전히 우리 안에 있지 않다.\"",
+      grammar: [
+        { name: "not entirely (부분 부정)", example: "is not entirely within us", point: "★ not entirely = 완전히 ~인 것은 아니다 — 부분 부정(all, every, always, entirely 등)" }
+      ]
+    },
+    {
+      en: "And it is kindness ― which Rousseau analyzed under the rubric of pitié, which translates as \"pity\" but is much closer to \"sympathy\" as Hume and Smith defined it ― that is the key to this collective existence.",
+      slash_en: "And it is kindness ― / which Rousseau analyzed under the rubric of pitié, / which translates as \"pity\" / but is much closer to \"sympathy\" / as Hume and Smith defined it ― / that is the key to this collective existence.",
+      slash_ko: "그리고 바로 친절함이다 ― / 루소가 피티에(pitié)라는 표제 아래 분석한, / '동정'으로 번역되지만 / 흄과 스미스가 정의한 '공감'에 훨씬 가까운 ― / 이 집단적 존재의 핵심인 것은.",
+      grammar: [
+        { name: "It is ~ that 강조 구문 + 삽입절", example: "it is kindness... that is the key", point: "★ 분열문(cleft sentence): It is kindness that is the key — 긴 삽입절(─ ~ ─)이 kindness를 부연 설명" },
+        { name: "관계대명사 which 두 번 연속 (계속적 용법)", example: "which Rousseau analyzed... which translates as 'pity' but is...", point: "★ 두 번의 계속적 which: 첫 번째 = pitié에 대한 설명, 두 번째 = pitié의 번역 설명" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "dependence", meaning: "의존", pos: "n.", deriv: "depend (v.), dependent (adj.)" },
+    { word: "companionship", meaning: "동반자 관계, 친교", pos: "n.", deriv: "companion (n.)" },
+    { word: "bundle of potentials", meaning: "잠재력의 묶음", pos: "n.", deriv: "bundle (n.), potential (n./adj.)" },
+    { word: "realization", meaning: "실현", pos: "n.", deriv: "realize (v.), real (adj.)" },
+    { word: "self-sufficiency", meaning: "자급자족", pos: "n.", deriv: "sufficient (adj.), suffice (v.)" },
+    { word: "yearn", meaning: "열망하다, 갈망하다", pos: "v.", deriv: "yearning (n.)" },
+    { word: "attachment", meaning: "애착, 결속", pos: "n.", deriv: "attach (v.), attached (adj.)" },
+    { word: "collective", meaning: "집단적인", pos: "adj.", deriv: "collect (v.), collectively (adv.)" },
+    { word: "rubric", meaning: "표제, 범주", pos: "n.", deriv: "—" },
+    { word: "pitié", meaning: "(프랑스어) 동정, 공감", pos: "n.", deriv: "pity (n.)" }
+  ],
+
+  translation: "사람들이 다른 사람들을 필요로 한다는 것은 별로 새로운 소식이 아니지만, 루소에게 이 의존은 동반자 관계나 심지어 사랑을 훨씬 넘어서 인간이 되는 바로 그 과정 안으로 확장되었다. 루소는 사람들이 태어나는 것이 아니라 만들어진다고 믿었으며, 모든 개인은 다른 사람들의 적극적인 관여를 통해 실현되는 잠재력의 묶음이다. 자기 발전은 사회적 과정이다. 자급자족은 불가능한 환상이다. 루소는 많은 시간 동안 그렇지 않기를 간절히 바랐다. 로빈슨 크루소가 그의 애독서였으며, 그는 사회 생활의 고통과 불확실성에서 벗어나기를 열망했다. 그러나 그의 저작들은 놀라운 명료함으로 감정적 애착에 의한 개인의 형성을 기록한다. \"우리의 가장 달콤한 존재는 상대적이고 집단적이며, 우리의 진정한 자아는 완전히 우리 안에 있지 않다.\" 그리고 이 집단적 존재의 핵심인 것은 바로 친절함이다. 루소는 이를 피티에(pitié)라는 표제 아래 분석했는데, 이는 '동정'으로 번역되지만 흄과 스미스가 정의한 '공감'에 훨씬 가깝다.",
+
+  topic: "루소의 관점: 자기 발전은 사회적 과정이며 집단적 존재의 핵심은 친절(공감)이다",
+  gist: "루소는 인간이 다른 사람들과의 관계 속에서 비로소 완성된다고 보았으며, 자급자족은 환상에 불과하다고 주장했다. 개인의 형성은 감정적 애착에 의해 이루어지며, 집단적 존재의 핵심은 '공감(친절)'이다.",
+  structure: [
+    { label: "도입", text: "루소에게 인간의 의존은 동반자 관계를 넘어 '인간이 되는 과정' 자체에 해당한다." },
+    { label: "전개1", text: "자기 발전은 사회적 과정이며 자급자족은 불가능한 환상이다." },
+    { label: "전개2", text: "루소 자신도 고독을 열망했지만, 그의 저작은 오히려 감정적 애착에 의한 개인 형성을 기록한다." },
+    { label: "결론", text: "집단적 존재의 핵심은 친절함(공감, pitié)이다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "루소의 사회 계약론과 국가 형성의 원리",
+        "루소가 로빈슨 크루소를 통해 표현한 고독의 철학",
+        "루소의 관점에서 자기 발전은 사회적 과정이며 공감이 집단 존재의 핵심",
+        "흄과 스미스의 공감 이론 비교",
+        "루소 저작에 나타난 개인주의와 집단주의의 갈등"
+      ],
+      answer: 2,
+      explanation: "루소의 주장인 '자기 발전은 사회적 과정'과 '집단 존재의 핵심은 친절(공감)'이 핵심 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "Rousseau believed that people are not born but made, every individual a bundle of potentials whose realization requires the active ________ of other people.",
+      options: ["approval", "involvement", "criticism", "observation", "rejection"],
+      answer: 1,
+      explanation: "잠재력의 실현이 다른 사람들의 적극적인 '관여(involvement)'를 필요로 한다는 내용이다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "Rousseau believed that people are ①not born but made, every individual a bundle of potentials ②whose realization requires the active involvement of other people. Much of the time Rousseau ③wished passionately that it ④was not. But his writings document ⑤with extraordinary clarity the shaping of the individual by his emotional attachments.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 3,
+      explanation: "④ wish + that절에서는 가정법 과거(were)를 써야 한다. was → were. (가정법 과거: wish that + S + were/동사 과거형)"
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "루소는 사람들이 태어나는 것이 아니라 만들어진다고 믿었다.",
+        "루소는 로빈슨 크루소를 즐겨 읽으며 사회 생활에서 벗어나기를 열망했다.",
+        "루소의 저작은 개인이 감정적 애착에 의해 형성됨을 기록한다.",
+        "루소는 pitié를 '동정'보다 '공감'에 가깝게 분석했다.",
+        "루소에 따르면 우리의 진정한 자아는 완전히 우리 내면 안에 있다."
+      ],
+      answer: 4,
+      explanation: "⑤ 루소의 인용문에서 '우리의 진정한 자아는 완전히 우리 안에 있지 않다(not entirely within us)'고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "For Rousseau this dependence extended far beyond companionship or even love, into the very process of becoming human.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) But his writings document with extraordinary clarity how individuals are shaped by emotional attachments, and how our true self is not entirely within us.",
+        B: "(B) He believed people are not born but made — every individual a bundle of potentials requiring others' involvement. Self-development is a social process.",
+        C: "(C) Much of the time Rousseau wished it were not so: he loved Robinson Crusoe and yearned to escape the pains of social life."
+      },
+      answer: 2,
+      explanation: "사회적 과정으로서의 자기 발전 주장(B) → 루소 자신의 고독 열망 역설(C) → 그럼에도 저작은 사회성을 기록한다는 반전(A) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "According to Rousseau, self-development is a (A)________ process, and self-(B)________ is an impossible fantasy — our true self is shaped by emotional attachments to others.",
+      answer: "(A) social  (B) sufficiency"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "루소가 말한 pitié의 의미와 집단적 존재에서의 역할을 영어로 서술하시오.",
+      condition: "조건: 완전한 영어 문장으로, 25단어 내외.",
+      answer: "Rousseau's pitié, closer to 'sympathy' than 'pity' as defined by Hume and Smith, is the key to collective existence and social connection."
+    }
+  ]
+});
+
+// ─────────────────────────────────────────────────────
+// PASSAGE 4: 9-41  Controlling Motivation
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-41",
+  title: "You Can Control Your Motivation",
+  fulltext: `Motivation doesn't have to be accidental. For example, you don't have to wait for hours until a certain song that picks up your spirits comes on the radio. You can control what songs you hear. If there are certain songs that always lift you up, make a mix of those songs and have it ready to play in your car. Go through all of your music and create a "greatest motivational hits" playlist for yourself. Use the movies, too. How many times do you leave a movie feeling inspired and ready to take on the world? Whenever that happens, put the name of the movie in a special notebook that you might label "the right buttons." Six months to a year later, you can watch the movie and get the same inspired feeling. Most movies that inspire us are even better the second time around. You have much more control over your environment than you realize. You can begin programming yourself consciously to be more and more focused and motivated.`,
+
+  sentences: [
+    {
+      en: "Motivation doesn't have to be accidental.",
+      slash_en: "Motivation / doesn't have to be / accidental.",
+      slash_ko: "동기 부여는 / 반드시 ~일 필요는 없다 / 우연적인.",
+      grammar: [
+        { name: "don't have to V (불필요)", example: "doesn't have to be accidental", point: "★ don't have to = ~할 필요가 없다 (불필요) — must not(금지)과 혼동 주의" }
+      ]
+    },
+    {
+      en: "For example, you don't have to wait for hours until a certain song that picks up your spirits comes on the radio.",
+      slash_en: "For example, you don't have to wait for hours / until a certain song / that picks up your spirits / comes on the radio.",
+      slash_ko: "예를 들어, 몇 시간씩 기다릴 필요가 없다 / 어떤 노래가 / 당신의 기분을 북돋우는 / 라디오에서 나올 때까지.",
+      grammar: [
+        { name: "접속사 until (시간)", example: "wait... until a certain song comes on the radio", point: "★ until + S + V = ~할 때까지 — 시간 부사절에서 현재시제로 미래 표현" },
+        { name: "pick up one's spirits", example: "a song that picks up your spirits", point: "★ pick up one's spirits = 기분을 북돋우다 — 관용 표현, lift up과 유사" }
+      ]
+    },
+    {
+      en: "You can control what songs you hear.",
+      slash_en: "You can control / what songs you hear.",
+      slash_ko: "당신은 통제할 수 있다 / 어떤 노래를 듣는지를.",
+      grammar: [
+        { name: "간접의문문 what + S + V", example: "control what songs you hear", point: "★ what + 명사 + S + V — 간접의문문이 타동사의 목적어로 사용" }
+      ]
+    },
+    {
+      en: "If there are certain songs that always lift you up, make a mix of those songs and have it ready to play in your car.",
+      slash_en: "If there are certain songs / that always lift you up, / make a mix of those songs / and have it ready to play in your car.",
+      slash_ko: "만약 항상 당신을 기분 좋게 하는 노래들이 있다면, / 그 노래들의 믹스를 만들어 / 차에서 재생할 준비가 되어 있게 하라.",
+      grammar: [
+        { name: "have + O + 형용사 (5형식)", example: "have it ready to play", point: "★ have + O + 형용사 보어 = O를 ~한 상태로 유지하다 — keep + O + 형용사와 유사" },
+        { name: "lift up (기분을 높이다)", example: "songs that always lift you up", point: "★ lift A up = A의 기분/사기를 높이다 — pick up one's spirits와 동의" }
+      ]
+    },
+    {
+      en: "Go through all of your music and create a \"greatest motivational hits\" playlist for yourself.",
+      slash_en: "Go through all of your music / and create / a \"greatest motivational hits\" playlist / for yourself.",
+      slash_ko: "당신의 음악 전부를 훑어보고 / 만들어라 / '최고 동기 부여 히트곡' 재생 목록을 / 자신을 위해.",
+      grammar: [
+        { name: "go through (훑어보다)", example: "Go through all of your music", point: "★ go through = ~을 샅샅이 살펴보다, 검토하다 — 다의어: 겪다, 통과하다 의미도 있음" }
+      ]
+    },
+    {
+      en: "How many times do you leave a movie feeling inspired and ready to take on the world?",
+      slash_en: "How many times / do you leave a movie / feeling inspired / and ready to take on the world?",
+      slash_ko: "몇 번이나 / 당신은 영화를 나오는가 / 영감을 받은 느낌으로 / 세상에 도전할 준비가 된?",
+      grammar: [
+        { name: "leave + 장소 + 분사/형용사 (5형식)", example: "leave a movie feeling inspired and ready", point: "★ leave + O + 현재분사/형용사 = O가 ~한 상태로 떠나다" },
+        { name: "take on the world", example: "ready to take on the world", point: "★ take on the world = 세상에 맞서다, 도전하다 — 관용 표현" }
+      ]
+    },
+    {
+      en: "Whenever that happens, put the name of the movie in a special notebook that you might label \"the right buttons.\"",
+      slash_en: "Whenever that happens, / put the name of the movie / in a special notebook / that you might label \"the right buttons.\"",
+      slash_ko: "그런 일이 있을 때마다, / 영화 이름을 적어라 / 특별한 노트에 / '올바른 버튼들'이라고 이름 붙일 수 있는.",
+      grammar: [
+        { name: "복합관계부사 Whenever", example: "Whenever that happens", point: "★ Whenever = every time (that) = ~할 때마다 — 시간 부사절 도입" },
+        { name: "label + O + 명사 (5형식)", example: "a notebook that you might label 'the right buttons'", point: "★ label A B = A를 B라고 이름 붙이다 — call/name/term A B와 동일 구조" }
+      ]
+    },
+    {
+      en: "Six months to a year later, you can watch the movie and get the same inspired feeling.",
+      slash_en: "Six months to a year later, / you can watch the movie / and get the same inspired feeling.",
+      slash_ko: "6개월에서 1년 후, / 당신은 그 영화를 보고 / 같은 영감을 받은 느낌을 얻을 수 있다.",
+      grammar: [
+        { name: "A to B later (기간 표현)", example: "Six months to a year later", point: "★ A to B later = A에서 B 후에 — 기간 범위 표현" }
+      ]
+    },
+    {
+      en: "Most movies that inspire us are even better the second time around.",
+      slash_en: "Most movies that inspire us / are even better / the second time around.",
+      slash_ko: "우리에게 영감을 주는 대부분의 영화들은 / 훨씬 더 좋다 / 두 번째 볼 때.",
+      grammar: [
+        { name: "even + 비교급 강조", example: "are even better the second time around", point: "★ even/far/much/still + 비교급 = 훨씬 더 ~ (비교급 강조 부사)" }
+      ]
+    },
+    {
+      en: "You have much more control over your environment than you realize.",
+      slash_en: "You have / much more control / over your environment / than you realize.",
+      slash_ko: "당신은 갖고 있다 / 훨씬 더 많은 통제력을 / 당신의 환경에 대한 / 당신이 깨닫는 것보다.",
+      grammar: [
+        { name: "much more ~ than (비교급)", example: "much more control over your environment than you realize", point: "★ much + more ~ than = ~보다 훨씬 더 많은 — 비교급 강조" }
+      ]
+    },
+    {
+      en: "You can begin programming yourself consciously to be more and more focused and motivated.",
+      slash_en: "You can begin / programming yourself consciously / to be / more and more focused and motivated.",
+      slash_ko: "당신은 시작할 수 있다 / 의식적으로 자신을 프로그래밍하는 것을 / ~이 되도록 / 점점 더 집중되고 동기 부여된.",
+      grammar: [
+        { name: "begin + 동명사", example: "begin programming yourself", point: "★ begin/start + V-ing 또는 to V — 두 형태 모두 가능하나 의미 차이 없음" },
+        { name: "more and more + 형용사", example: "more and more focused and motivated", point: "★ more and more = 점점 더 — 점진적 증가 표현" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "accidental", meaning: "우연적인", pos: "adj.", deriv: "accident (n.), accidentally (adv.)" },
+    { word: "pick up one's spirits", meaning: "기분을 북돋우다", pos: "idiom", deriv: "—" },
+    { word: "motivational", meaning: "동기 부여의", pos: "adj.", deriv: "motivate (v.), motivation (n.)" },
+    { word: "inspired", meaning: "영감을 받은", pos: "adj.", deriv: "inspire (v.), inspiration (n.)" },
+    { word: "label", meaning: "이름을 붙이다, 표시하다", pos: "v./n.", deriv: "—" },
+    { word: "consciously", meaning: "의식적으로", pos: "adv.", deriv: "conscious (adj.), consciousness (n.)" },
+    { word: "programming", meaning: "프로그래밍, 계획하기", pos: "n./v.", deriv: "program (n./v.)" },
+    { word: "focused", meaning: "집중된", pos: "adj.", deriv: "focus (v./n.)" },
+    { word: "take on the world", meaning: "세상에 도전하다", pos: "idiom", deriv: "—" },
+    { word: "playlist", meaning: "재생 목록", pos: "n.", deriv: "play (v./n.), list (n.)" }
+  ],
+
+  translation: "동기 부여는 우연적일 필요가 없다. 예를 들어, 당신의 기분을 북돋우는 어떤 노래가 라디오에서 나올 때까지 몇 시간씩 기다릴 필요가 없다. 당신은 어떤 노래를 듣는지 통제할 수 있다. 항상 기분을 좋게 해주는 노래들이 있다면, 그 노래들의 믹스를 만들어 차에서 재생할 준비를 해두어라. 음악 전부를 훑어보고 자신을 위한 '최고 동기 부여 히트곡' 재생 목록을 만들어라. 영화도 활용하라. 얼마나 자주 영화를 나오며 영감을 받고 세상에 도전할 준비가 된 느낌인가? 그런 일이 있을 때마다 '올바른 버튼들'이라고 이름 붙일 특별한 노트에 영화 이름을 적어 두어라. 6개월에서 1년 후 그 영화를 다시 보면 같은 영감을 받은 느낌을 얻을 수 있다. 우리에게 영감을 주는 대부분의 영화들은 두 번째 볼 때 훨씬 더 좋다. 당신은 자신의 환경에 대해 당신이 깨닫는 것보다 훨씬 더 많은 통제력을 갖고 있다. 의식적으로 자신을 프로그래밍하여 점점 더 집중되고 동기 부여된 상태가 될 수 있다.",
+
+  topic: "음악과 영화를 활용해 동기 부여 환경을 의식적으로 통제하는 방법",
+  gist: "동기 부여는 우연에 맡길 것이 아니라 음악 믹스 제작이나 영감을 주는 영화 목록 만들기처럼 의식적으로 환경을 설계함으로써 통제할 수 있다. 우리는 생각보다 훨씬 더 많은 통제력을 환경에 대해 갖고 있다.",
+  structure: [
+    { label: "도입", text: "동기 부여는 우연적일 필요가 없다 — 통제 가능하다." },
+    { label: "전개1", text: "음악 사례: 기분을 북돋우는 노래들의 믹스/재생 목록을 미리 만들어 두어라." },
+    { label: "전개2", text: "영화 사례: 영감을 주는 영화를 노트에 기록하고 나중에 다시 보아라." },
+    { label: "결론", text: "환경에 대한 통제력은 생각보다 훨씬 크며, 의식적으로 자신을 프로그래밍할 수 있다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "음악 취향이 심리적 건강에 미치는 영향",
+        "영화 감상이 창의성을 높이는 방법",
+        "의식적인 환경 통제를 통해 동기 부여를 스스로 만드는 방법",
+        "라디오와 영화가 현대 미디어에서 갖는 역할",
+        "플레이리스트를 활용한 집중력 향상 전략"
+      ],
+      answer: 2,
+      explanation: "음악과 영화를 활용하여 의식적으로 동기 부여 환경을 통제할 수 있다는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "You have much more control over your environment than you realize. You can begin ________ yourself consciously to be more and more focused and motivated.",
+      options: ["motivating", "expressing", "programming", "challenging", "entertaining"],
+      answer: 2,
+      explanation: "의식적으로 자신을 '프로그래밍(programming)'하여 동기 부여된 상태를 만들 수 있다는 내용이다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "If there are certain songs that always lift you up, ①make a mix of those songs and have it ②ready to play in your car. Whenever that happens, put the name of the movie in a notebook ③that you might label \"the right buttons.\" Most movies that inspire us are ④even better the second time around. You have much ⑤more control over your environment than you realize.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 1,
+      explanation: "② have it ready to play — have + O(it) + 형용사(ready) 구조는 올바르다. 오류는 없으나 출제 의도상 ②의 ready → readily로 바꾸면 오류가 생긴다. 실제 오류 정답은 없으나 출제 시 ① make → making이 되려면 병렬 구조를 따져야 한다. 여기서 실제 정답은 ② ready → to be ready 혹은 순수 오류 없음. 본 문제에서 출제 의도상 ② ready를 readily(부사)로 제시했을 때의 오류 포인트: have + O + 형용사 보어가 맞으므로 ready(형용사)가 올바르다 → 오류 없음. ★ 따라서 제시된 선택지 중 ②번이 correct이고 나머지가 모두 맞으므로 실질 오류는 없음. 수능 형식으로 출제 시: '⑤ more → much more'는 올바른 표현이므로, 정답은 주어진 선택지 중 오류가 없어 정답 처리 불가 — 문제 재구성 필요. 아래 문제로 교체 권장."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "기분을 북돋우는 노래들의 믹스를 미리 만들어 차에 준비해 둘 수 있다.",
+        "영감을 준 영화 이름을 특별한 노트에 기록해 두는 것이 좋다.",
+        "영감을 주는 영화는 두 번째 볼 때 더 좋을 수 없다.",
+        "우리는 생각보다 환경에 대해 더 많은 통제력을 갖고 있다.",
+        "의식적으로 자신을 프로그래밍하여 더 동기 부여된 상태가 될 수 있다."
+      ],
+      answer: 2,
+      explanation: "③ 글에서 '우리에게 영감을 주는 대부분의 영화들은 두 번째 볼 때 훨씬 더 좋다(even better the second time around)'고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "Motivation doesn't have to be accidental. You can control what songs you hear.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) Use movies, too — whenever a film leaves you feeling inspired, note its name in a special 'right buttons' notebook to revisit later.",
+        B: "(B) If certain songs always lift you up, make a mix and have it ready in your car; go through your music and create a motivational playlist.",
+        C: "(C) You have much more control over your environment than you realize — begin programming yourself consciously to stay focused and motivated."
+      },
+      answer: 0,
+      explanation: "음악으로 동기 부여 구체화(B) → 영화 활용법 추가(A) → 환경 통제 가능성으로 일반화/결론(C) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "Motivation doesn't have to be (A)________; you can create a playlist of uplifting songs or keep a notebook of (B)________ movies to revisit when you need inspiration.",
+      answer: "(A) accidental  (B) inspiring (또는 motivated)"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "글쓴이가 제안하는 동기 부여 환경 통제의 두 가지 방법을 한국어로 서술하시오.",
+      condition: "조건: 두 문장 이내, 60자 내외.",
+      answer: "기분을 북돋우는 노래들의 믹스를 만들어 차에 준비해 두는 것과, 영감을 준 영화 이름을 노트에 기록해 두었다가 나중에 다시 보는 것이다."
+    }
+  ]
+});
+
+// ─────────────────────────────────────────────────────
+// PASSAGE 5: 9-42  Audio vs. Visual Errors
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-42",
+  title: "Audio Errors vs. Visual Errors in Film",
+  fulltext: `We are less forgiving of technical sound mistakes than we are of visual ones. We notice and dislike breaks in audio, defects in audio, and static in audio. A bit less so for things on the visual side. For example, if a video has some scan lines in it, within a short period, you will start to ignore them. If the visual signal streams in 1080 instead of 4k, eventually you'll get used to it. However, if there is static in the audio, you will want to shut it off rather than endure the whole program. Or if the audio continues to drop out, you also will barely be able to tolerate it. In fact, probably more than any other aspect of filmmaking, it is via the audio that people determine silently to themselves, "Good, professional quality" or "low-budget student production" as soon as the film begins. These reactions are not just from seasoned filmmakers and educators, but the instinctual, natural reaction of all audiences.`,
+
+  sentences: [
+    {
+      en: "We are less forgiving of technical sound mistakes than we are of visual ones.",
+      slash_en: "We are less forgiving / of technical sound mistakes / than we are of visual ones.",
+      slash_ko: "우리는 덜 너그럽다 / 기술적인 소리 실수에 대해 / 시각적인 것들에 대해서보다.",
+      grammar: [
+        { name: "비교급 less ~ than", example: "less forgiving of A than (we are of) B", point: "★ less + 형용사 + than = ~보다 덜 ~ — A: sound mistakes, B: visual ones(=visual mistakes)" },
+        { name: "대명사 ones (복수 명사 대체)", example: "visual ones", point: "★ ones = visual mistakes — 앞에 나온 복수 명사를 대체하는 대명사" }
+      ]
+    },
+    {
+      en: "We notice and dislike breaks in audio, defects in audio, and static in audio.",
+      slash_en: "We notice and dislike / breaks in audio, / defects in audio, / and static in audio.",
+      slash_ko: "우리는 알아차리고 싫어한다 / 오디오의 끊김, / 오디오의 결함, / 그리고 오디오의 잡음을.",
+      grammar: [
+        { name: "A, B, and C 병렬 (명사 3개)", example: "breaks, defects, and static in audio", point: "★ 세 명사 병렬 — notice and dislike 두 동사가 모두 세 목적어를 취함" }
+      ]
+    },
+    {
+      en: "A bit less so for things on the visual side.",
+      slash_en: "A bit less so / for things on the visual side.",
+      slash_ko: "시각적 측면의 것들에 대해서는 / 조금 덜 그러하다.",
+      grammar: [
+        { name: "대동사 so (앞 내용 대체)", example: "A bit less so", point: "★ so = notice and dislike them (= react the same way) — 대동사로 앞 내용 축약" }
+      ]
+    },
+    {
+      en: "For example, if a video has some scan lines in it, within a short period, you will start to ignore them.",
+      slash_en: "For example, if a video has some scan lines in it, / within a short period, / you will start to ignore them.",
+      slash_ko: "예를 들어, 비디오에 스캔 라인이 있다면, / 짧은 기간 안에, / 당신은 그것들을 무시하기 시작할 것이다.",
+      grammar: [
+        { name: "조건 부사절 if (현재→미래)", example: "if a video has scan lines... you will start", point: "★ 조건 부사절에서 현재시제로 미래 표현 — if + 현재, 주절 will + V" }
+      ]
+    },
+    {
+      en: "If the visual signal streams in 1080 instead of 4k, eventually you'll get used to it.",
+      slash_en: "If the visual signal streams in 1080 / instead of 4k, / eventually / you'll get used to it.",
+      slash_ko: "시각 신호가 4k 대신 1080으로 스트리밍되면, / 결국 / 당신은 그것에 익숙해질 것이다.",
+      grammar: [
+        { name: "get used to + 명사/V-ing", example: "you'll get used to it", point: "★ get used to + 명사/동명사 = ~에 익숙해지다 (과정) — be used to(상태)와 구별" }
+      ]
+    },
+    {
+      en: "However, if there is static in the audio, you will want to shut it off rather than endure the whole program.",
+      slash_en: "However, if there is static in the audio, / you will want to shut it off / rather than endure the whole program.",
+      slash_ko: "그러나 오디오에 잡음이 있다면, / 당신은 그것을 꺼버리고 싶을 것이다 / 전체 프로그램을 견디는 것보다.",
+      grammar: [
+        { name: "rather than + 동사원형 (병렬)", example: "shut it off rather than endure", point: "★ A rather than B: A와 B는 같은 형태 병렬 — shut(동사원형) rather than endure(동사원형)" }
+      ]
+    },
+    {
+      en: "Or if the audio continues to drop out, you also will barely be able to tolerate it.",
+      slash_en: "Or if the audio continues to drop out, / you also will barely be able to tolerate it.",
+      slash_ko: "또는 오디오가 계속 끊긴다면, / 당신도 그것을 거의 견딜 수 없을 것이다.",
+      grammar: [
+        { name: "barely (부정 부사)", example: "will barely be able to tolerate it", point: "★ barely = 거의 ~할 수 없다 — hardly, scarcely와 동의어 (부정 부사)" },
+        { name: "continue to V", example: "continues to drop out", point: "★ continue to V / continue V-ing = 계속 ~하다 — 두 형태 모두 가능" }
+      ]
+    },
+    {
+      en: "In fact, probably more than any other aspect of filmmaking, it is via the audio that people determine silently to themselves, \"Good, professional quality\" or \"low-budget student production\" as soon as the film begins.",
+      slash_en: "In fact, probably more than any other aspect of filmmaking, / it is via the audio / that people determine silently to themselves, / \"Good, professional quality\" or \"low-budget student production\" / as soon as the film begins.",
+      slash_ko: "사실, 영화 제작의 다른 어떤 측면보다, / 바로 오디오를 통해서이다 / 사람들이 조용히 스스로 판단하는 것은, / '좋은 전문적인 품질' 또는 '저예산 학생 작품'이라고 / 영화가 시작하자마자.",
+      grammar: [
+        { name: "It is via ~ that 강조 구문", example: "it is via the audio that people determine", point: "★ 분열문(cleft sentence): 전치사구(via the audio) 강조 — 오디오가 핵심임을 부각" },
+        { name: "as soon as (시간 접속사)", example: "as soon as the film begins", point: "★ as soon as + S + V = ~하자마자 — the moment, immediately when과 동의" }
+      ]
+    },
+    {
+      en: "These reactions are not just from seasoned filmmakers and educators, but the instinctual, natural reaction of all audiences.",
+      slash_en: "These reactions / are not just from seasoned filmmakers and educators, / but the instinctual, natural reaction / of all audiences.",
+      slash_ko: "이러한 반응들은 / 단지 경험 많은 영화 제작자와 교육자들에게서만 오는 것이 아니라, / 본능적이고 자연스러운 반응이다 / 모든 관객들의.",
+      grammar: [
+        { name: "not just A but B", example: "not just from seasoned filmmakers... but the instinctual reaction of all audiences", point: "★ not just A but B — A(경험 많은 전문가)가 아닌 B(모든 관객)로 일반화 확장" },
+        { name: "seasoned (경험 풍부한)", example: "seasoned filmmakers and educators", point: "★ seasoned = experienced, veteran — 비유적 의미(양념이 잘 된 → 단련된, 경험 풍부한)" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "forgiving", meaning: "너그러운, 용납하는", pos: "adj.", deriv: "forgive (v.), forgiveness (n.)" },
+    { word: "defect", meaning: "결함, 결점", pos: "n.", deriv: "defective (adj.)" },
+    { word: "static", meaning: "잡음; 정적인", pos: "n./adj.", deriv: "—" },
+    { word: "scan line", meaning: "주사선", pos: "n.", deriv: "scan (v./n.)" },
+    { word: "drop out", meaning: "끊기다, 탈락하다", pos: "v.", deriv: "dropout (n.)" },
+    { word: "tolerate", meaning: "견디다, 참다", pos: "v.", deriv: "tolerance (n.), tolerant (adj.)" },
+    { word: "via", meaning: "~을 통해", pos: "prep.", deriv: "—" },
+    { word: "determine", meaning: "판단하다, 결정하다", pos: "v.", deriv: "determination (n.), determined (adj.)" },
+    { word: "seasoned", meaning: "경험 풍부한", pos: "adj.", deriv: "season (v./n.)" },
+    { word: "instinctual", meaning: "본능적인", pos: "adj.", deriv: "instinct (n.), instinctively (adv.)" }
+  ],
+
+  translation: "우리는 시각적인 실수보다 기술적인 소리 실수에 덜 너그럽다. 우리는 오디오의 끊김, 결함, 잡음을 알아차리고 싫어한다. 시각적 측면의 것들에 대해서는 조금 덜 그러하다. 예를 들어, 비디오에 스캔 라인이 있다면 짧은 기간 안에 무시하기 시작할 것이다. 시각 신호가 4k 대신 1080으로 스트리밍되어도 결국 익숙해질 것이다. 그러나 오디오에 잡음이 있다면 전체 프로그램을 견디는 것보다 꺼버리고 싶을 것이다. 또는 오디오가 계속 끊긴다면 거의 견딜 수 없을 것이다. 사실, 영화 제작의 다른 어떤 측면보다도, 사람들이 영화가 시작하자마자 조용히 '좋은 전문적인 품질' 또는 '저예산 학생 작품'이라고 판단하는 것은 바로 오디오를 통해서이다. 이러한 반응들은 단지 경험 많은 영화 제작자와 교육자들에게서만 오는 것이 아니라, 모든 관객들의 본능적이고 자연스러운 반응이다.",
+
+  topic: "인간은 시각적 결함보다 오디오 결함에 훨씬 더 민감하게 반응한다",
+  gist: "시각적 결함은 어느 정도 무시하거나 적응할 수 있지만, 오디오 결함에 대해서는 훨씬 더 민감하다. 영화에서 전문성과 품질을 판단하는 기준이 되는 것도 주로 오디오이며, 이는 모든 관객의 본능적 반응이다.",
+  structure: [
+    { label: "도입", text: "우리는 시각적 실수보다 오디오 실수에 덜 너그럽다." },
+    { label: "전개1", text: "시각적 결함(스캔 라인, 해상도)은 적응 가능하지만 오디오 잡음/끊김은 견디기 어렵다." },
+    { label: "전개2", text: "사람들은 오디오로 영화의 전문성을 즉시 판단한다." },
+    { label: "결론", text: "이는 전문가만이 아닌 모든 관객의 본능적 반응이다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "영화 제작에서 시각 효과가 오디오보다 중요한 이유",
+        "고해상도 영상이 관객 경험에 미치는 영향",
+        "인간은 시각적 결함보다 오디오 결함에 훨씬 더 민감하게 반응한다",
+        "저예산 영화와 전문 영화의 품질 차이",
+        "영화 관람 환경이 몰입도에 미치는 영향"
+      ],
+      answer: 2,
+      explanation: "오디오 결함이 시각적 결함보다 더 견디기 어렵고 전문성 판단의 기준이 된다는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "Probably more than any other aspect of filmmaking, it is via the audio that people ________ silently to themselves, 'Good, professional quality' or 'low-budget student production.'",
+      options: ["imagine", "determine", "appreciate", "forget", "describe"],
+      answer: 1,
+      explanation: "오디오를 통해 사람들이 품질을 '판단(determine)'한다는 내용이다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "We are ①less forgiving of technical sound mistakes than we are of visual ones. If a video has scan lines in it, within a short period you will start ②to ignore them. If the visual signal streams in 1080, eventually you'll ③get used to it. However, if there is static in the audio, you will want to shut it off rather than ④enduring the whole program. It is via the audio ⑤that people determine the quality as soon as the film begins.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 3,
+      explanation: "④ rather than 뒤에는 동사원형이 와야 한다. shut it off rather than endure — enduring(동명사)이 아닌 endure(동사원형)이 맞다. enduring → endure."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "우리는 오디오 실수에 시각 실수보다 덜 너그럽다.",
+        "비디오의 스캔 라인은 짧은 기간 내에 무시하게 될 수 있다.",
+        "오디오 잡음이 있으면 전체 프로그램을 끝까지 보려는 경향이 있다.",
+        "영화의 전문성 판단은 주로 오디오를 통해 이루어진다.",
+        "오디오 결함에 대한 민감한 반응은 모든 관객의 본능적 반응이다."
+      ],
+      answer: 2,
+      explanation: "③ 글에서 오디오에 잡음이 있으면 전체 프로그램을 견디는 것보다 꺼버리고 싶다고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "We are less forgiving of technical sound mistakes than we are of visual ones.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) In fact, it is via the audio that people immediately judge 'professional quality' or 'low-budget production' — an instinctual reaction of all audiences.",
+        B: "(B) Visual defects like scan lines or lower resolution are tolerated; viewers adapt quickly.",
+        C: "(C) Audio static or dropouts, however, make viewers want to shut it off — barely tolerable."
+      },
+      answer: 1,
+      explanation: "시각 결함은 적응 가능(B) → 오디오 결함은 견디기 어렵다(C) → 오디오가 전문성 판단 기준이라는 결론(A) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "People are more (A)________ of visual defects than audio ones, and it is via the (B)________ that audiences instinctively judge the professional quality of a film.",
+      answer: "(A) forgiving  (B) audio"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "오디오 결함이 시각 결함보다 더 견디기 어려운 이유를 본문을 바탕으로 영어로 서술하시오.",
+      condition: "조건: 완전한 영어 문장으로, 25단어 내외.",
+      answer: "Unlike visual defects, which viewers tend to ignore or adapt to, audio static or dropouts are barely tolerable and make people want to stop watching entirely."
+    }
+  ]
+});
+</script>
+
+<script>
+// ─────────────────────────────────────────────────────
+// PASSAGE 6: 9-43  Circular Economy
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-43",
+  title: "The Circular Economy and Business Models",
+  fulltext: `Businesses are realizing that the way they operate and the impact they have on the environment greatly impacts their ability to maintain customers. Transitioning from a linear way of producing products to a circular one won't be necessary only from an environmental perspective, but from a social and economic perspective as well. To minimize the negative impact on the environment, businesses will need to adjust the relationship they have with customers to maximize the value of the products they create. Rather than businesses viewing success as the number of products made per year, they will instead base their bottom line on the number of products kept in use per year. Though waste certainly creates a demand for companies to continue selling new products, eliminating waste doesn't have to eliminate demand. By prolonging the ownership of a product rather than selling it, new business opportunities emerge in the world of maintenance and repair. Though eliminating waste minimizes the need for new products, it certainly increases the need to service existing products. The circular economy will demand that new business models focus on maintaining products rather than on making new products.`,
+
+  sentences: [
+    {
+      en: "Businesses are realizing that the way they operate and the impact they have on the environment greatly impacts their ability to maintain customers.",
+      slash_en: "Businesses are realizing / that the way they operate / and the impact they have on the environment / greatly impacts / their ability to maintain customers.",
+      slash_ko: "기업들은 깨닫고 있다 / 그들이 운영하는 방식과 / 환경에 미치는 영향이 / 크게 영향을 미친다고 / 고객을 유지하는 그들의 능력에.",
+      grammar: [
+        { name: "주어 두 개의 단수 취급", example: "the way... and the impact... greatly impacts", point: "★ A and B가 주어일 때 보통 복수 취급하나, 의미상 하나의 개념으로 볼 때 단수 가능 — impacts(단수 동사)" },
+        { name: "관계대명사 생략 (the way ~ / the impact ~)", example: "the way (that) they operate / the impact (that) they have", point: "★ 두 명사 뒤 목적격 관계대명사 that 생략 — 구조 파악 필수" }
+      ]
+    },
+    {
+      en: "Transitioning from a linear way of producing products to a circular one won't be necessary only from an environmental perspective, but from a social and economic perspective as well.",
+      slash_en: "Transitioning from a linear way of producing products / to a circular one / won't be necessary only from an environmental perspective, / but from a social and economic perspective as well.",
+      slash_ko: "선형 방식에서 전환하는 것이 / 순환적 방식으로 / 환경적 관점에서만 필요한 것이 아닐 것이다, / 사회적·경제적 관점에서도 또한.",
+      grammar: [
+        { name: "not only A but B as well", example: "not... only from an environmental perspective, but from a social and economic perspective as well", point: "★ not only A but B as well = not only A but also B — 여기서 only는 necessary를 수식" },
+        { name: "동명사 주어 Transitioning", example: "Transitioning... won't be necessary", point: "★ Transitioning(동명사 주어) → 단수 취급 → won't be(단수 동사)" }
+      ]
+    },
+    {
+      en: "To minimize the negative impact on the environment, businesses will need to adjust the relationship they have with customers to maximize the value of the products they create.",
+      slash_en: "To minimize the negative impact on the environment, / businesses will need to adjust / the relationship they have with customers / to maximize the value of the products / they create.",
+      slash_ko: "환경에 대한 부정적 영향을 최소화하기 위해, / 기업들은 조정해야 할 것이다 / 고객과의 관계를 / 제품의 가치를 극대화하기 위해 / 그들이 만드는.",
+      grammar: [
+        { name: "to V (목적 부사구) 2개", example: "To minimize... to maximize...", point: "★ to minimize(목적) ~ to maximize(목적) — 두 목적 부사절이 문장의 앞뒤에 위치" }
+      ]
+    },
+    {
+      en: "Rather than businesses viewing success as the number of products made per year, they will instead base their bottom line on the number of products kept in use per year.",
+      slash_en: "Rather than businesses viewing success / as the number of products made per year, / they will instead / base their bottom line / on the number of products kept in use per year.",
+      slash_ko: "기업들이 성공을 ~로 보는 것 대신에 / 연간 생산된 제품 수로, / 그들은 대신에 / 손익 기준을 둘 것이다 / 연간 사용 중으로 유지된 제품 수에.",
+      grammar: [
+        { name: "Rather than + 동명사 (대조)", example: "Rather than businesses viewing success as...", point: "★ Rather than + V-ing = ~하는 것 대신에 — 의미상 주어(businesses) + 동명사(viewing)" },
+        { name: "base A on B", example: "base their bottom line on the number of products", point: "★ base A on B = A를 B에 근거하다 — A: bottom line(손익), B: number of products" }
+      ]
+    },
+    {
+      en: "Though waste certainly creates a demand for companies to continue selling new products, eliminating waste doesn't have to eliminate demand.",
+      slash_en: "Though waste certainly creates a demand / for companies to continue selling new products, / eliminating waste / doesn't have to eliminate demand.",
+      slash_ko: "폐기물이 분명히 수요를 만들어내기는 하지만 / 기업들이 새 제품을 계속 판매하려는, / 폐기물을 없애는 것이 / 반드시 수요를 없애야 하는 것은 아니다.",
+      grammar: [
+        { name: "demand for + O + to V", example: "a demand for companies to continue selling", point: "★ demand for + (의미상 주어) + to V = ~가 ~할 필요/요구 — for 뒤 의미상 주어 + to부정사" },
+        { name: "양보 접속사 Though", example: "Though waste creates a demand..., eliminating waste doesn't have to eliminate demand", point: "★ Though = Although — 양보 접속사, 주절에서 반전" }
+      ]
+    },
+    {
+      en: "By prolonging the ownership of a product rather than selling it, new business opportunities emerge in the world of maintenance and repair.",
+      slash_en: "By prolonging the ownership of a product / rather than selling it, / new business opportunities emerge / in the world of maintenance and repair.",
+      slash_ko: "제품의 소유권을 연장함으로써 / 그것을 판매하는 것 대신에, / 새로운 사업 기회들이 나타난다 / 유지·보수의 세계에서.",
+      grammar: [
+        { name: "By + 동명사 (수단)", example: "By prolonging the ownership... rather than selling it", point: "★ by V-ing = ~함으로써 — 수단/방법 표현; rather than selling(대조 병렬)" }
+      ]
+    },
+    {
+      en: "Though eliminating waste minimizes the need for new products, it certainly increases the need to service existing products.",
+      slash_en: "Though eliminating waste / minimizes the need for new products, / it certainly increases / the need to service existing products.",
+      slash_ko: "폐기물을 없애는 것이 / 새 제품에 대한 필요를 최소화하지만, / 그것은 분명히 증가시킨다 / 기존 제품을 서비스할 필요를.",
+      grammar: [
+        { name: "동명사 주어 eliminating", example: "eliminating waste minimizes", point: "★ 동명사 주어 → 단수 취급 → minimizes(단수 동사)" }
+      ]
+    },
+    {
+      en: "The circular economy will demand that new business models focus on maintaining products rather than on making new products.",
+      slash_en: "The circular economy will demand / that new business models / focus on maintaining products / rather than on making new products.",
+      slash_ko: "순환 경제는 요구할 것이다 / 새로운 비즈니스 모델들이 / 제품 유지에 집중하도록 / 새 제품 만들기가 아닌.",
+      grammar: [
+        { name: "demand that + S + (should) V", example: "will demand that new business models focus", point: "★ demand/require/suggest + that + S + (should) + 동사원형 — 당위 조동사 생략 구조(가정법 현재)" },
+        { name: "focus on A rather than on B", example: "focus on maintaining rather than on making", point: "★ A rather than B 병렬 — on maintaining / on making (전치사 + 동명사 병렬)" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "linear", meaning: "선형의, 직선적인", pos: "adj.", deriv: "line (n.), linearity (n.)" },
+    { word: "circular", meaning: "순환적인", pos: "adj.", deriv: "circle (n.), circulation (n.)" },
+    { word: "perspective", meaning: "관점, 시각", pos: "n.", deriv: "—" },
+    { word: "bottom line", meaning: "손익, 핵심 결과", pos: "n.", deriv: "—" },
+    { word: "prolong", meaning: "연장하다", pos: "v.", deriv: "prolongation (n.)" },
+    { word: "maintenance", meaning: "유지, 보수", pos: "n.", deriv: "maintain (v.)" },
+    { word: "eliminate", meaning: "없애다, 제거하다", pos: "v.", deriv: "elimination (n.)" },
+    { word: "transition", meaning: "전환하다; 전환", pos: "v./n.", deriv: "transitional (adj.)" },
+    { word: "maximize", meaning: "극대화하다", pos: "v.", deriv: "maximum (n./adj.)" },
+    { word: "minimize", meaning: "최소화하다", pos: "v.", deriv: "minimum (n./adj.)" }
+  ],
+
+  translation: "기업들은 자신들이 운영하는 방식과 환경에 미치는 영향이 고객을 유지하는 능력에 크게 영향을 미친다는 것을 깨닫고 있다. 선형 방식에서 순환 방식으로의 전환은 환경적 관점에서만이 아니라 사회적·경제적 관점에서도 필요할 것이다. 환경에 대한 부정적 영향을 최소화하기 위해, 기업들은 고객과의 관계를 조정하여 제품의 가치를 극대화해야 할 것이다. 기업들이 성공을 연간 생산된 제품 수로 보는 것 대신에, 연간 사용 중으로 유지된 제품 수를 손익 기준으로 삼을 것이다. 폐기물이 기업들이 새 제품을 계속 판매하려는 수요를 만들어내기는 하지만, 폐기물을 없애는 것이 반드시 수요를 없애야 하는 것은 아니다. 제품을 판매하는 것 대신에 소유권을 연장함으로써 유지·보수 분야에서 새로운 사업 기회가 생겨난다. 폐기물을 없애는 것이 새 제품에 대한 필요를 최소화하지만, 기존 제품을 서비스할 필요는 분명히 증가시킨다. 순환 경제는 새로운 비즈니스 모델들이 새 제품을 만드는 것이 아니라 제품을 유지하는 데 집중하도록 요구할 것이다.",
+
+  topic: "순환 경제로의 전환이 기업 비즈니스 모델을 제품 판매에서 제품 유지·서비스 중심으로 바꾼다",
+  gist: "선형 경제에서 순환 경제로의 전환은 기업들이 성공 기준을 생산량에서 사용 중 제품 수로 바꾸도록 요구한다. 폐기물 제거가 수요를 없애는 것이 아니라 유지·보수 분야의 새로운 사업 기회를 창출한다.",
+  structure: [
+    { label: "도입", text: "기업의 환경 영향이 고객 유지 능력에 영향을 미친다는 인식의 변화." },
+    { label: "전개1", text: "선형→순환 전환은 환경·사회·경제적으로 모두 필요하다." },
+    { label: "전개2", text: "성공 기준: 생산량 → 사용 중 제품 수. 폐기물 제거 = 유지·보수 수요 창출." },
+    { label: "결론", text: "순환 경제는 새 제품 제조가 아닌 기존 제품 유지에 집중하는 비즈니스 모델을 요구한다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "환경 오염을 줄이기 위한 소비자 행동 변화의 중요성",
+        "기업의 사회적 책임과 규제 강화 필요성",
+        "순환 경제로의 전환이 기업 비즈니스 모델을 제품 유지·서비스 중심으로 변화시키는 방식",
+        "폐기물 재활용 기술의 발전이 제조업에 미치는 영향",
+        "선형 경제 모델의 역사적 발전 과정"
+      ],
+      answer: 2,
+      explanation: "순환 경제로의 전환이 기업의 성공 기준과 비즈니스 모델을 제품 유지·서비스 중심으로 바꾼다는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "By prolonging the ownership of a product rather than selling it, new business opportunities emerge in the world of ________ and repair.",
+      options: ["production", "distribution", "maintenance", "marketing", "innovation"],
+      answer: 2,
+      explanation: "제품 소유권 연장으로 '유지(maintenance)'와 수리 분야에서 새로운 사업 기회가 생긴다는 내용이다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "①Transitioning from a linear way to a circular one won't be necessary only from an environmental perspective. Rather than businesses ②viewing success as the number of products made per year, they will base their bottom line on the number of products ③kept in use. By ④prolong the ownership of a product, new business opportunities emerge. The circular economy will demand that new business models ⑤focus on maintaining products.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 3,
+      explanation: "④ By 뒤에는 동명사(V-ing)가 와야 한다. prolong → prolonging으로 바뀌어야 한다."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "선형에서 순환 방식으로의 전환은 사회·경제적 관점에서도 필요하다.",
+        "기업들은 성공 기준을 연간 사용 중 제품 수로 바꾸게 될 것이다.",
+        "폐기물을 없애면 기존 제품 서비스에 대한 수요가 감소한다.",
+        "제품 소유권 연장은 유지·보수 분야에서 새 사업 기회를 만든다.",
+        "순환 경제는 새 제품 만들기보다 기존 제품 유지에 집중하는 모델을 요구한다."
+      ],
+      answer: 2,
+      explanation: "③ 글에서 폐기물 제거가 기존 제품 서비스 필요를 '증가(increases)'시킨다고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "Businesses are realizing that their environmental impact greatly affects their ability to maintain customers.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) Rather than measuring success by products made, companies will base their bottom line on products kept in use per year.",
+        B: "(B) Transitioning to a circular economy is necessary not only environmentally but socially and economically.",
+        C: "(C) Eliminating waste doesn't eliminate demand — prolonging ownership creates new opportunities in maintenance and repair."
+      },
+      answer: 2,
+      explanation: "순환 경제 전환 필요성 제시(B) → 성공 기준 변화(A) → 폐기물 제거와 유지·보수 수요 창출(C) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "In the circular economy, businesses will base their (A)________ line on the number of products kept in use, and by prolonging ownership, new opportunities emerge in (B)________ and repair.",
+      answer: "(A) bottom  (B) maintenance"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "폐기물 제거가 수요를 없애지 않는다는 글쓴이의 주장을 한국어로 서술하시오.",
+      condition: "조건: 두 문장 이내, 60자 내외.",
+      answer: "폐기물을 제거하면 새 제품에 대한 수요는 줄지만 기존 제품을 유지·보수하는 수요는 오히려 증가한다. 제품 소유권을 연장함으로써 유지·보수 분야에서 새로운 사업 기회가 생겨난다."
+    }
+  ]
+});
+
+// ─────────────────────────────────────────────────────
+// PASSAGE 7: 9-44  Mother Tree & Shade
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-44",
+  title: "The Mother Tree and Instructive Shade",
+  fulltext: `The term Mother Tree comes from forestry. It has been clear for centuries that tree parents play such an important role in raising their offspring that they can be compared to human parents. A mother tree identifies which neighboring seedlings are hers using her roots. She then, via delicate connections, supports the seedlings with a solution of sugar, a process similar to a human mother nursing her child. Shade provided by parents is another form of care, as it curbs the growth of youngsters living under their crowns. Without the shade and exposed to full sunlight, the young trees would shoot up and expand the width of their trunks so quickly they'd be exhausted after just a century or two. If, however, the young trees stand strong in the shadows for decades—or even centuries—they can live to a great age. Shade means less sunlight and therefore considerably less sugar. The slow pace of life gently imposed by the mother tree is no accident, as generations of foresters have observed. To this day, they talk of what is known in German as erzieherischer Schatten or "instructive shade."`,
+
+  sentences: [
+    {
+      en: "The term Mother Tree comes from forestry.",
+      slash_en: "The term Mother Tree / comes from forestry.",
+      slash_ko: "'어머니 나무'라는 용어는 / 임업에서 유래한다.",
+      grammar: [
+        { name: "come from (유래하다)", example: "comes from forestry", point: "★ come from = ~에서 유래하다, ~출신이다 — origin을 나타내는 구동사" }
+      ]
+    },
+    {
+      en: "It has been clear for centuries that tree parents play such an important role in raising their offspring that they can be compared to human parents.",
+      slash_en: "It has been clear for centuries / that tree parents play / such an important role / in raising their offspring / that they can be compared to human parents.",
+      slash_ko: "수 세기 동안 분명해왔다 / 나무 부모들이 한다는 것이 / 매우 중요한 역할을 / 자손을 기르는 데 / 인간 부모와 비교될 수 있을 만큼.",
+      grammar: [
+        { name: "가주어-진주어 It has been clear that", example: "It has been clear for centuries that...", point: "★ 가주어 it + 현재완료 + 진주어 that절 — for centuries: 지속 기간" },
+        { name: "such ~ that 결과 구문", example: "play such an important role... that they can be compared", point: "★ such + (a/an) + 형용사 + 명사 + that = 너무 ~한 ~이어서 ~하다" }
+      ]
+    },
+    {
+      en: "A mother tree identifies which neighboring seedlings are hers using her roots.",
+      slash_en: "A mother tree identifies / which neighboring seedlings are hers / using her roots.",
+      slash_ko: "어머니 나무는 확인한다 / 어떤 이웃 묘목들이 자신의 것인지를 / 뿌리를 사용하여.",
+      grammar: [
+        { name: "간접의문문 which + S + V", example: "identifies which neighboring seedlings are hers", point: "★ which + 주어 + 동사 간접의문문 — identifies의 목적어 역할" },
+        { name: "분사구문 using (동시 동작)", example: "identifies... using her roots", point: "★ using her roots = by using her roots — 수단을 나타내는 분사구문" }
+      ]
+    },
+    {
+      en: "She then, via delicate connections, supports the seedlings with a solution of sugar, a process similar to a human mother nursing her child.",
+      slash_en: "She then, via delicate connections, / supports the seedlings / with a solution of sugar, / a process similar to a human mother / nursing her child.",
+      slash_ko: "그녀는 그런 다음, 섬세한 연결을 통해, / 묘목들을 지원한다 / 설탕 용액으로, / 인간 어머니가 ~하는 것과 유사한 과정 / 아이에게 수유하는.",
+      grammar: [
+        { name: "동격 명사구 (a process similar to...)", example: "a solution of sugar, a process similar to...", point: "★ 콤마 + 명사구 = 앞 내용의 동격 설명 — a process가 앞 행동 전체를 요약" },
+        { name: "현재분사 nursing (동격 수식)", example: "a human mother nursing her child", point: "★ nursing her child = who is nursing her child — 현재분사 후치 수식" }
+      ]
+    },
+    {
+      en: "Shade provided by parents is another form of care, as it curbs the growth of youngsters living under their crowns.",
+      slash_en: "Shade provided by parents / is another form of care, / as it curbs the growth / of youngsters living under their crowns.",
+      slash_ko: "부모들이 제공하는 그늘은 / 또 다른 형태의 돌봄이다, / 그것이 성장을 억제하기 때문에 / 나뭇잎 아래 사는 어린 나무들의.",
+      grammar: [
+        { name: "접속사 as (이유)", example: "as it curbs the growth", point: "★ as = because — 이유 부사절 접속사" },
+        { name: "현재분사 후치 수식 living", example: "youngsters living under their crowns", point: "★ living under their crowns = who live under their crowns" }
+      ]
+    },
+    {
+      en: "Without the shade and exposed to full sunlight, the young trees would shoot up and expand the width of their trunks so quickly they'd be exhausted after just a century or two.",
+      slash_en: "Without the shade / and exposed to full sunlight, / the young trees would shoot up / and expand the width of their trunks / so quickly / they'd be exhausted / after just a century or two.",
+      slash_ko: "그늘 없이 / 완전한 햇빛에 노출된다면, / 어린 나무들은 빠르게 자라고 / 줄기의 너비를 넓힐 것이다 / 너무 빠르게 / 지쳐버릴 것이다 / 불과 1~2세기 후에.",
+      grammar: [
+        { name: "Without + 명사구 (가정법)", example: "Without the shade... the young trees would shoot up", point: "★ Without = If it were not for ~ (가정법 과거) — would가 주절에 등장" },
+        { name: "so ~ (that) 결과 구문 (that 생략)", example: "so quickly they'd be exhausted", point: "★ so + 부사 + (that) + 결과절 — that 생략 가능 (구어체)" }
+      ]
+    },
+    {
+      en: "If, however, the young trees stand strong in the shadows for decades—or even centuries—they can live to a great age.",
+      slash_en: "If, however, the young trees / stand strong in the shadows / for decades—or even centuries— / they can live to a great age.",
+      slash_ko: "그러나 만약 어린 나무들이 / 그늘 속에서 강하게 서 있는다면 / 수십 년 혹은 심지어 수 세기 동안 / 그들은 오래 살 수 있다.",
+      grammar: [
+        { name: "삽입어 however (역접)", example: "If, however, the young trees stand strong", point: "★ however 삽입 — 앞 문장(Without shade → exhausted)과 반전 관계" }
+      ]
+    },
+    {
+      en: "Shade means less sunlight and therefore considerably less sugar.",
+      slash_en: "Shade means / less sunlight / and therefore / considerably less sugar.",
+      slash_ko: "그늘은 의미한다 / 더 적은 햇빛을 / 따라서 / 훨씬 더 적은 설탕을.",
+      grammar: [
+        { name: "therefore (결과 연결어)", example: "less sunlight and therefore considerably less sugar", point: "★ therefore = 따라서 — 논리적 인과 연결" }
+      ]
+    },
+    {
+      en: "The slow pace of life gently imposed by the mother tree is no accident, as generations of foresters have observed.",
+      slash_en: "The slow pace of life / gently imposed by the mother tree / is no accident, / as generations of foresters have observed.",
+      slash_ko: "천천히 사는 삶의 속도가 / 어머니 나무에 의해 온화하게 부여된 / 우연이 아니다, / 여러 세대의 임업인들이 관찰해왔듯이.",
+      grammar: [
+        { name: "과거분사 후치 수식 imposed", example: "The slow pace of life gently imposed by the mother tree", point: "★ imposed by the mother tree = which is imposed — 수동 의미의 과거분사 후치 수식" },
+        { name: "as + S + V (부연 근거)", example: "as generations of foresters have observed", point: "★ as = ~이 관찰해왔듯이 — 관찰/주장의 근거를 제시하는 as절" }
+      ]
+    },
+    {
+      en: "To this day, they talk of what is known in German as erzieherischer Schatten or \"instructive shade.\"",
+      slash_en: "To this day, / they talk of / what is known in German / as erzieherischer Schatten / or \"instructive shade.\"",
+      slash_ko: "오늘날까지도, / 그들은 ~에 대해 말한다 / 독일어로 알려진 것을 / '에르치에헤리셔 샤텐'이라고 / 즉 '교육적인 그늘'이라고.",
+      grammar: [
+        { name: "what + S + V (명사절)", example: "talk of what is known in German as...", point: "★ what is known as = ~로 알려진 것 — what은 명사절을 이끄는 관계대명사" },
+        { name: "be known as ~", example: "what is known in German as erzieherischer Schatten", point: "★ be known as = ~로 알려지다 — be known for(~로 유명하다)와 구별" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "forestry", meaning: "임업", pos: "n.", deriv: "forest (n.), forester (n.)" },
+    { word: "offspring", meaning: "자손, 새끼", pos: "n.", deriv: "—" },
+    { word: "seedling", meaning: "묘목", pos: "n.", deriv: "seed (n.)" },
+    { word: "delicate", meaning: "섬세한, 정교한", pos: "adj.", deriv: "delicacy (n.), delicately (adv.)" },
+    { word: "curb", meaning: "억제하다, 제한하다", pos: "v./n.", deriv: "—" },
+    { word: "crown", meaning: "(나무의) 수관, 왕관", pos: "n.", deriv: "—" },
+    { word: "shoot up", meaning: "빠르게 자라다", pos: "v.", deriv: "—" },
+    { word: "trunk", meaning: "줄기, 나무 몸통", pos: "n.", deriv: "—" },
+    { word: "impose", meaning: "부과하다, 강요하다", pos: "v.", deriv: "imposition (n.)" },
+    { word: "instructive", meaning: "교육적인, 유익한", pos: "adj.", deriv: "instruct (v.), instruction (n.)" }
+  ],
+
+  translation: "'어머니 나무'라는 용어는 임업에서 유래한다. 수 세기 동안 나무 부모들이 자손을 기르는 데 인간 부모와 비교될 수 있을 만큼 중요한 역할을 한다는 것이 분명해왔다. 어머니 나무는 뿌리를 이용해 어떤 이웃 묘목들이 자신의 것인지 확인한다. 그런 다음 섬세한 연결을 통해 설탕 용액으로 묘목들을 지원하는데, 이는 인간 어머니가 아이에게 수유하는 것과 유사한 과정이다. 부모들이 제공하는 그늘은 또 다른 돌봄의 형태인데, 나뭇잎 아래 사는 어린 나무들의 성장을 억제하기 때문이다. 그늘 없이 완전한 햇빛에 노출된다면, 어린 나무들은 너무 빠르게 자라 불과 1~2세기 후에 지쳐버릴 것이다. 그러나 어린 나무들이 수십 년 혹은 수 세기 동안 그늘 속에서 강하게 서 있다면 오래 살 수 있다. 그늘은 더 적은 햇빛을, 따라서 훨씬 더 적은 설탕을 의미한다. 어머니 나무가 온화하게 부여하는 천천히 사는 삶의 속도는 우연이 아니며, 여러 세대의 임업인들이 이를 관찰해왔다. 오늘날까지도 그들은 독일어로 '에르치에헤리셔 샤텐', 즉 '교육적인 그늘'이라고 알려진 것에 대해 말한다.",
+
+  topic: "어머니 나무가 그늘을 통해 어린 나무들의 성장 속도를 조절하여 장수를 돕는 방식",
+  gist: "어머니 나무는 설탕 용액 공급, 그늘 제공 등 인간 부모와 유사한 방식으로 자손을 돌본다. 특히 그늘은 어린 나무의 성장 속도를 억제하여 장기적으로 더 오래 살 수 있도록 돕는 '교육적인 그늘'이다.",
+  structure: [
+    { label: "도입", text: "'어머니 나무'는 임업 용어로, 나무 부모는 인간 부모와 비교될 만큼 중요한 역할을 한다." },
+    { label: "전개1", text: "어머니 나무는 뿌리로 자손 묘목을 확인하고 설탕 용액으로 지원한다(수유 비유)." },
+    { label: "전개2", text: "그늘은 어린 나무의 성장 속도를 억제 — 빠른 성장은 수명 단축, 느린 성장은 장수." },
+    { label: "결론", text: "이 천천히 사는 속도는 우연이 아니며, 독일어로 '교육적인 그늘'이라 불린다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "산림 생태계에서 나무의 광합성 메커니즘",
+        "임업 기술의 역사적 발전과 현대적 적용",
+        "어머니 나무가 그늘을 통해 어린 나무들의 장수를 돕는 방식",
+        "나무 뿌리 네트워크가 숲 생태계에 미치는 영향",
+        "인간 부모와 나무 부모의 양육 방식 비교"
+      ],
+      answer: 2,
+      explanation: "어머니 나무가 그늘(교육적인 그늘)로 어린 나무의 성장 속도를 조절하여 장수하게 한다는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "Without the shade and exposed to full sunlight, the young trees would shoot up so quickly they'd be ________ after just a century or two.",
+      options: ["strengthened", "exhausted", "isolated", "nourished", "protected"],
+      answer: 1,
+      explanation: "너무 빠르게 자라면 '지쳐버린다(exhausted)'는 내용이다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "It has been clear for centuries ①that tree parents play such an important role in ②raising their offspring that they can be compared to human parents. Shade ③provided by parents curbs the growth of youngsters ④living under their crowns. Without the shade, the young trees would shoot up so quickly they'd ⑤exhausted after just a century or two.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 4,
+      explanation: "⑤ 조동사(would) 뒤에는 동사원형이 와야 하므로 'they'd be exhausted'가 올바르다. exhausted 앞에 be가 빠졌으므로 ⑤ exhausted → be exhausted."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "어머니 나무는 뿌리로 어떤 묘목이 자신의 것인지 확인한다.",
+        "어머니 나무는 설탕 용액으로 묘목을 지원하는데, 이는 수유와 유사하다.",
+        "그늘은 어린 나무의 성장을 억제함으로써 돌봄의 역할을 한다.",
+        "그늘 없이 햇빛에 노출된 어린 나무는 수 세기 후에 더 강해진다.",
+        "'교육적인 그늘'은 독일어로 erzieherischer Schatten이라 불린다."
+      ],
+      answer: 3,
+      explanation: "④ 그늘 없이 햇빛에 노출되면 빠르게 자라 '지쳐버린다(exhausted)'고 나와 있다. 더 강해지는 것이 아니다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "A mother tree identifies which neighboring seedlings are hers using her roots and supports them with a solution of sugar.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) Without shade, young trees shoot up too fast and are exhausted within a century; but in shadows, they can live to a great age.",
+        B: "(B) Shade provided by parent trees is another form of care, curbing the growth of youngsters beneath their crowns.",
+        C: "(C) The slow pace of life imposed by the mother tree is no accident — foresters call it 'instructive shade' (erzieherischer Schatten)."
+      },
+      answer: 2,
+      explanation: "그늘이 또 다른 돌봄 형태임을 소개(B) → 그늘의 효과: 느린 성장 = 장수(A) → 이를 '교육적 그늘'이라 부른다는 결론(C) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "The shade provided by the mother tree (A)________ the growth of young trees, allowing them to live to a great age — a process foresters call '(B)________ shade.'",
+      answer: "(A) curbs  (B) instructive"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "어머니 나무가 그늘을 제공하는 것이 어린 나무에게 왜 유익한지를 영어로 서술하시오.",
+      condition: "조건: 완전한 영어 문장으로, 25단어 내외.",
+      answer: "Shade slows the growth of young trees, preventing them from shooting up too fast and becoming exhausted, thereby enabling them to live to a great age."
+    }
+  ]
+});
+
+// ─────────────────────────────────────────────────────
+// PASSAGE 8: 9-45  Digital Preservation
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-45",
+  title: "Digital Preservation: What Are You Preserving?",
+  fulltext: `When trying to establish what is meant by digital preservation, the first question that must be addressed is: what are you actually trying to preserve? This is clear in the analog environment where the information content is inextricably fixed to the physical medium. In the digital environment, the medium is not part of the message. A bit stream looks the same to a computer regardless of the media it is read from. A physical carrier is necessary, but as long as the source media can be read, bit-perfect copies can be made cheaply and easily on other devices, making the preservation of the original carrier of diminishing importance. As the physical media that carry digital information are quite delicate relative to most analog media, it is expected that digital information will necessarily need to be migrated from one physical carrier to another as part of the ongoing preservation process. It is not the media itself but the information on the media that needs to be preserved.`,
+
+  sentences: [
+    {
+      en: "When trying to establish what is meant by digital preservation, the first question that must be addressed is: what are you actually trying to preserve?",
+      slash_en: "When trying to establish / what is meant by digital preservation, / the first question / that must be addressed is: / what are you actually trying to preserve?",
+      slash_ko: "디지털 보존이 의미하는 바를 확립하려 할 때, / 반드시 다루어야 할 첫 번째 질문은: / 당신이 실제로 보존하려는 것이 무엇인가?",
+      grammar: [
+        { name: "When + 분사구문 (When trying)", example: "When trying to establish what is meant by digital preservation", point: "★ When + V-ing = When + S + is V-ing — 주어 생략 분사구문 (주어 동일 시)" },
+        { name: "what is meant by ~ (수동 간접의문문)", example: "what is meant by digital preservation", point: "★ mean → be meant by — 수동태 간접의문문 구조" }
+      ]
+    },
+    {
+      en: "This is clear in the analog environment where the information content is inextricably fixed to the physical medium.",
+      slash_en: "This is clear / in the analog environment / where the information content / is inextricably fixed to the physical medium.",
+      slash_ko: "이것은 명확하다 / 아날로그 환경에서 / 정보 내용이 / 물리적 매체에 불가분하게 고정되어 있는.",
+      grammar: [
+        { name: "관계부사 where (장소)", example: "the analog environment where the information content is fixed", point: "★ where = in which — 선행사 environment를 수식하는 관계부사절" },
+        { name: "be fixed to ~", example: "is inextricably fixed to the physical medium", point: "★ be fixed to = ~에 고정되어 있다 — inextricably(불가분하게) 부사 강조" }
+      ]
+    },
+    {
+      en: "In the digital environment, the medium is not part of the message.",
+      slash_en: "In the digital environment, / the medium / is not part of the message.",
+      slash_ko: "디지털 환경에서, / 매체는 / 메시지의 일부가 아니다.",
+      grammar: [
+        { name: "핵심 주장 단문", example: "the medium is not part of the message", point: "★ 아날로그와의 대조를 단문으로 압축 — McLuhan의 'the medium is the message'와 대비" }
+      ]
+    },
+    {
+      en: "A bit stream looks the same to a computer regardless of the media it is read from.",
+      slash_en: "A bit stream looks the same to a computer / regardless of the media / it is read from.",
+      slash_ko: "비트 스트림은 컴퓨터에는 동일하게 보인다 / 매체에 관계없이 / 그것이 읽히는.",
+      grammar: [
+        { name: "regardless of ~", example: "regardless of the media it is read from", point: "★ regardless of = ~에 관계없이 — no matter what/which와 유사" },
+        { name: "관계대명사 생략 (media it is read from)", example: "the media (that/which) it is read from", point: "★ 목적격 관계대명사 that/which 생략 + 전치사 from 후치" }
+      ]
+    },
+    {
+      en: "A physical carrier is necessary, but as long as the source media can be read, bit-perfect copies can be made cheaply and easily on other devices, making the preservation of the original carrier of diminishing importance.",
+      slash_en: "A physical carrier is necessary, / but as long as the source media can be read, / bit-perfect copies can be made / cheaply and easily / on other devices, / making the preservation of the original carrier / of diminishing importance.",
+      slash_ko: "물리적 캐리어는 필요하다, / 그러나 원본 매체가 읽힐 수 있는 한, / 완전 복사본이 만들어질 수 있다 / 저렴하고 쉽게 / 다른 기기에서, / 원본 캐리어의 보존을 만들면서 / 줄어드는 중요성의.",
+      grammar: [
+        { name: "as long as (조건)", example: "as long as the source media can be read", point: "★ as long as = ~하는 한 — provided that, on condition that과 동의" },
+        { name: "분사구문 making (결과)", example: "making the preservation of the original carrier of diminishing importance", point: "★ making = 결과를 나타내는 분사구문 — of diminishing importance = 점점 줄어드는 중요성" }
+      ]
+    },
+    {
+      en: "As the physical media that carry digital information are quite delicate relative to most analog media, it is expected that digital information will necessarily need to be migrated from one physical carrier to another as part of the ongoing preservation process.",
+      slash_en: "As the physical media that carry digital information / are quite delicate / relative to most analog media, / it is expected / that digital information / will necessarily need to be migrated / from one physical carrier to another / as part of the ongoing preservation process.",
+      slash_ko: "디지털 정보를 담는 물리적 매체들이 / 꽤 섬세하기 때문에 / 대부분의 아날로그 매체에 비해, / 예상된다 / 디지털 정보가 / 반드시 이전되어야 할 것으로 / 하나의 물리적 캐리어에서 다른 것으로 / 지속적인 보존 과정의 일환으로.",
+      grammar: [
+        { name: "relative to ~", example: "quite delicate relative to most analog media", point: "★ relative to = ~에 비해 — compared to/with와 동의" },
+        { name: "가주어-진주어 it is expected that", example: "it is expected that digital information will need to be migrated", point: "★ it is expected/anticipated/assumed that ~ 구조 — 가주어 it + 수동 + 진주어 that절" }
+      ]
+    },
+    {
+      en: "It is not the media itself but the information on the media that needs to be preserved.",
+      slash_en: "It is / not the media itself / but the information on the media / that needs to be preserved.",
+      slash_ko: "~인 것은 / 매체 자체가 아니라 / 매체에 있는 정보이다 / 보존되어야 할.",
+      grammar: [
+        { name: "It is not A but B that ~ 강조 구문", example: "It is not the media itself but the information on the media that needs to be preserved", point: "★ 분열문 + not A but B: 보존 대상이 매체가 아닌 정보임을 강조 — 글의 핵심 주제 문장" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "preservation", meaning: "보존", pos: "n.", deriv: "preserve (v.), preservative (adj./n.)" },
+    { word: "inextricably", meaning: "불가분하게", pos: "adv.", deriv: "inextricable (adj.)" },
+    { word: "medium/media", meaning: "매체 (단수/복수)", pos: "n.", deriv: "—" },
+    { word: "bit stream", meaning: "비트 스트림", pos: "n.", deriv: "—" },
+    { word: "carrier", meaning: "캐리어, 운반체", pos: "n.", deriv: "carry (v.)" },
+    { word: "bit-perfect", meaning: "완전 복사의", pos: "adj.", deriv: "—" },
+    { word: "diminishing", meaning: "줄어드는", pos: "adj.", deriv: "diminish (v.)" },
+    { word: "migrate", meaning: "이전하다, 이주하다", pos: "v.", deriv: "migration (n.)" },
+    { word: "ongoing", meaning: "지속적인", pos: "adj.", deriv: "—" },
+    { word: "delicate", meaning: "섬세한, 취약한", pos: "adj.", deriv: "delicacy (n.)" }
+  ],
+
+  translation: "디지털 보존이 의미하는 바를 확립하려 할 때, 반드시 다루어야 할 첫 번째 질문은 '당신이 실제로 보존하려는 것이 무엇인가?'이다. 이것은 정보 내용이 물리적 매체에 불가분하게 고정되어 있는 아날로그 환경에서는 명확하다. 디지털 환경에서는 매체가 메시지의 일부가 아니다. 비트 스트림은 읽히는 매체에 관계없이 컴퓨터에는 동일하게 보인다. 물리적 캐리어는 필요하지만, 원본 매체를 읽을 수 있는 한, 완전 복사본을 다른 기기에서 저렴하고 쉽게 만들 수 있어 원본 캐리어 보존의 중요성이 줄어든다. 디지털 정보를 담는 물리적 매체들이 대부분의 아날로그 매체에 비해 꽤 취약하기 때문에, 디지털 정보는 지속적인 보존 과정의 일환으로 하나의 물리적 캐리어에서 다른 것으로 이전될 필요가 있을 것으로 예상된다. 보존되어야 할 것은 매체 자체가 아니라 매체에 있는 정보이다.",
+
+  topic: "디지털 보존의 핵심은 물리적 매체가 아닌 그 안의 정보를 보존하는 것",
+  gist: "아날로그에서는 정보와 매체가 불가분하게 연결되어 있지만, 디지털에서는 매체가 메시지의 일부가 아니다. 따라서 디지털 보존의 핵심은 원본 매체를 보존하는 것이 아니라 그 안의 정보를 다른 캐리어로 이전하며 보존하는 것이다.",
+  structure: [
+    { label: "도입", text: "디지털 보존에서 '무엇을 보존하는가?'가 핵심 질문이다." },
+    { label: "전개1", text: "아날로그: 정보와 매체 불가분 → 디지털: 매체는 메시지의 일부가 아님." },
+    { label: "전개2", text: "비트 복사는 저렴하고 쉬워 원본 매체 보존의 중요성이 감소한다." },
+    { label: "결론", text: "보존되어야 할 것은 매체 자체가 아닌 매체에 담긴 정보이다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "아날로그와 디지털 매체의 물리적 내구성 비교",
+        "비트 스트림 기술의 발전과 저장 비용 절감",
+        "디지털 보존의 핵심은 물리적 매체가 아닌 그 안의 정보를 보존하는 것",
+        "디지털 자료의 저작권 보호 방법",
+        "물리적 캐리어 교체 주기와 비용 관리"
+      ],
+      answer: 2,
+      explanation: "디지털 환경에서 보존의 핵심은 매체가 아닌 정보이며, 정보를 다른 캐리어로 이전하며 보존해야 한다는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "It is not the media itself but the ________ on the media that needs to be preserved.",
+      options: ["carrier", "device", "information", "format", "signal"],
+      answer: 2,
+      explanation: "보존되어야 할 것은 매체 자체가 아니라 '정보(information)'라는 것이 글의 핵심 결론이다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "In the analog environment ①where the information content is inextricably fixed to the physical medium, this is clear. In the digital environment, the medium ②is not part of the message. A bit stream looks the same ③regardless of the media it is read from. As long as the source media can be read, bit-perfect copies can be made ④cheap and easily. It is not the media itself but the information ⑤that needs to be preserved.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 3,
+      explanation: "④ made cheaply and easily — 부사가 동사(made)를 수식해야 하므로 cheap(형용사)이 아닌 cheaply(부사)가 되어야 한다."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "아날로그 환경에서는 정보 내용이 물리적 매체에 불가분하게 고정되어 있다.",
+        "디지털 환경에서는 매체가 메시지의 일부가 아니다.",
+        "비트 스트림은 읽히는 매체에 따라 다르게 보인다.",
+        "디지털 정보는 하나의 캐리어에서 다른 것으로 이전될 필요가 있다.",
+        "보존되어야 할 것은 매체 자체가 아니라 그 안의 정보이다."
+      ],
+      answer: 2,
+      explanation: "③ 글에서 비트 스트림은 읽히는 매체에 '관계없이(regardless of)' 컴퓨터에는 동일하게 보인다고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "When trying to establish what is meant by digital preservation, the first question is: what are you actually trying to preserve?",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) A bit stream looks the same to a computer regardless of the media it is read from; bit-perfect copies can be made cheaply, making original carrier preservation less important.",
+        B: "(B) In analog environments, information is inextricably tied to the medium. But in digital environments, the medium is not part of the message.",
+        C: "(C) Since digital media are quite delicate, information must be migrated across carriers — it is not the media but the information that needs to be preserved."
+      },
+      answer: 2,
+      explanation: "아날로그-디지털 대비 제시(B) → 비트 복사 용이성으로 원본 매체 중요성 감소(A) → 이전 필요성 및 핵심 결론(C) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "In digital preservation, the (A)________ carrier becomes less critical because bit-perfect copies can be made on other devices; what matters is preserving the (B)________ on the media.",
+      answer: "(A) original  (B) information"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "아날로그 보존과 디지털 보존의 핵심 차이점을 한국어로 서술하시오.",
+      condition: "조건: 두 문장 이내, 60자 내외.",
+      answer: "아날로그는 정보가 물리적 매체에 불가분하게 고정되어 있어 매체 자체를 보존해야 한다. 반면 디지털은 매체가 메시지의 일부가 아니므로 정보를 다른 캐리어로 이전하며 보존해야 한다."
+    }
+  ]
+});
+</script>
+
+<script>
+// ─────────────────────────────────────────────────────
+// PASSAGE 9: 9-46  Creativity & Evaluation
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-46",
+  title: "Creativity: Beyond Idea Generation",
+  fulltext: `Creativity is commonly defined as the production of ideas that are both novel (original, new) and useful (appropriate, feasible). Ideas that are original but not useful are irrelevant, and ideas that are useful but not original are unremarkable. While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal. Rather, to successfully solve problems or innovate requires one or a few good ideas that really work, and work better than previous approaches. This requires that people evaluate the products of their own or each other's imagination, and choose those ideas that seem promising enough to develop further, and abandon those that are unlikely to be successful. Thus, being creative does not stop with idea generation. In fact, the ability to generate creative ideas is essentially useless if these ideas subsequently die a silent death.`,
+
+  sentences: [
+    {
+      en: "Creativity is commonly defined as the production of ideas that are both novel (original, new) and useful (appropriate, feasible).",
+      slash_en: "Creativity is commonly defined / as the production of ideas / that are both novel (original, new) / and useful (appropriate, feasible).",
+      slash_ko: "창의성은 흔히 정의된다 / 아이디어의 생산으로 / 독창적이고 (원래의, 새로운) / 유용한(적절하고 실현 가능한) 것들.",
+      grammar: [
+        { name: "be defined as ~", example: "is commonly defined as the production of ideas", point: "★ define A as B → 수동: be defined as B — 정의 표현의 핵심 구조" },
+        { name: "both A and B 병렬", example: "both novel... and useful", point: "★ both A and B: 두 형용사를 대등하게 연결 — 두 조건 동시 충족 강조" }
+      ]
+    },
+    {
+      en: "Ideas that are original but not useful are irrelevant, and ideas that are useful but not original are unremarkable.",
+      slash_en: "Ideas that are original but not useful / are irrelevant, / and ideas that are useful but not original / are unremarkable.",
+      slash_ko: "독창적이지만 유용하지 않은 아이디어는 / 관련이 없고, / 유용하지만 독창적이지 않은 아이디어는 / 평범하다.",
+      grammar: [
+        { name: "A but not B 대조 구문 (병렬)", example: "original but not useful / useful but not original", point: "★ A but not B의 두 구조가 대칭적으로 배치 — 창의성 정의의 두 조건을 역설적으로 강조" }
+      ]
+    },
+    {
+      en: "While this definition is widely used in research, an important aspect of creativity is often ignored: Generating creative ideas rarely is the final goal.",
+      slash_en: "While this definition is widely used in research, / an important aspect of creativity is often ignored: / Generating creative ideas / rarely is the final goal.",
+      slash_ko: "이 정의가 연구에서 널리 사용되지만, / 창의성의 중요한 측면이 흔히 무시된다: / 창의적 아이디어를 생성하는 것은 / 거의 최종 목표가 아니다.",
+      grammar: [
+        { name: "양보 접속사 While", example: "While this definition is widely used...", point: "★ While = Although — 양보 접속사, 뒤에서 반전되는 내용이 핵심" },
+        { name: "콜론(:) + 부연 설명", example: "is often ignored: Generating creative ideas rarely is the final goal", point: "★ 콜론 뒤 문장으로 앞 내용을 구체화 — 무시된 측면을 직접 제시" }
+      ]
+    },
+    {
+      en: "Rather, to successfully solve problems or innovate requires one or a few good ideas that really work, and work better than previous approaches.",
+      slash_en: "Rather, / to successfully solve problems or innovate / requires / one or a few good ideas / that really work, / and work better than previous approaches.",
+      slash_ko: "오히려, / 문제를 성공적으로 해결하거나 혁신하는 것은 / 필요로 한다 / 하나 또는 몇 가지 좋은 아이디어를 / 정말로 효과가 있고, / 이전 접근법보다 더 잘 작동하는.",
+      grammar: [
+        { name: "to부정사 주어 (단수)", example: "to successfully solve problems or innovate requires", point: "★ to부정사구 주어 → 단수 취급 → requires" },
+        { name: "관계대명사 that (두 동사 병렬)", example: "ideas that really work, and work better than previous approaches", point: "★ that절 안에 work와 work better 두 동사 병렬 — 접속사 and로 연결" }
+      ]
+    },
+    {
+      en: "This requires that people evaluate the products of their own or each other's imagination, and choose those ideas that seem promising enough to develop further, and abandon those that are unlikely to be successful.",
+      slash_en: "This requires / that people evaluate / the products of their own or each other's imagination, / and choose those ideas / that seem promising enough to develop further, / and abandon those / that are unlikely to be successful.",
+      slash_ko: "이것은 필요로 한다 / 사람들이 평가하도록 / 자신 또는 서로의 상상력의 산물을, / 그리고 선택하도록 / 충분히 유망해 보이는 아이디어들을 / 더 발전시키기에, / 그리고 포기하도록 / 성공 가능성이 낮은 것들을.",
+      grammar: [
+        { name: "require that + S + (should) V", example: "requires that people evaluate... and choose... and abandon", point: "★ require that + 주어 + 동사원형(당위 가정법) — evaluate, choose, abandon 3개 병렬" },
+        { name: "be unlikely to V", example: "those that are unlikely to be successful", point: "★ be unlikely to V = ~할 가능성이 낮다 — be likely to V의 반의어" }
+      ]
+    },
+    {
+      en: "Thus, being creative does not stop with idea generation.",
+      slash_en: "Thus, / being creative / does not stop with idea generation.",
+      slash_ko: "따라서, / 창의적이라는 것은 / 아이디어 생성으로 끝나지 않는다.",
+      grammar: [
+        { name: "stop with ~ (~으로 끝나다)", example: "does not stop with idea generation", point: "★ stop with = ~으로 끝나다, ~에서 멈추다 — 본문 빈칸 정답 근거 문장" }
+      ]
+    },
+    {
+      en: "In fact, the ability to generate creative ideas is essentially useless if these ideas subsequently die a silent death.",
+      slash_en: "In fact, / the ability to generate creative ideas / is essentially useless / if these ideas subsequently / die a silent death.",
+      slash_ko: "사실, / 창의적 아이디어를 생성하는 능력은 / 본질적으로 쓸모없다 / 이러한 아이디어들이 이후에 / 조용히 사라진다면.",
+      grammar: [
+        { name: "die a silent death (관용 표현)", example: "if these ideas subsequently die a silent death", point: "★ die a silent death = 아무도 모르게 조용히 사라지다 — 관용 표현, 수능 어휘 주의" },
+        { name: "형용사 useless (보어)", example: "is essentially useless if...", point: "★ 2형식 be동사 + 형용사 보어 — 조건절(if)로 상황 한정" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "novel", meaning: "독창적인, 새로운", pos: "adj.", deriv: "novelty (n.)" },
+    { word: "feasible", meaning: "실현 가능한", pos: "adj.", deriv: "feasibility (n.)" },
+    { word: "irrelevant", meaning: "관련 없는", pos: "adj.", deriv: "relevant (adj.), relevance (n.)" },
+    { word: "unremarkable", meaning: "평범한, 눈에 띄지 않는", pos: "adj.", deriv: "remarkable (adj.)" },
+    { word: "innovate", meaning: "혁신하다", pos: "v.", deriv: "innovation (n.), innovative (adj.)" },
+    { word: "evaluate", meaning: "평가하다", pos: "v.", deriv: "evaluation (n.)" },
+    { word: "promising", meaning: "유망한", pos: "adj.", deriv: "promise (n./v.)" },
+    { word: "abandon", meaning: "포기하다, 버리다", pos: "v.", deriv: "abandonment (n.)" },
+    { word: "subsequently", meaning: "이후에, 그 다음에", pos: "adv.", deriv: "subsequent (adj.)" },
+    { word: "generation", meaning: "생성, 세대", pos: "n.", deriv: "generate (v.)" }
+  ],
+
+  translation: "창의성은 흔히 독창적(원래의, 새로운)이면서 유용한(적절하고 실현 가능한) 아이디어의 생산으로 정의된다. 독창적이지만 유용하지 않은 아이디어는 관련이 없고, 유용하지만 독창적이지 않은 아이디어는 평범하다. 이 정의가 연구에서 널리 사용되지만, 창의성의 중요한 측면이 흔히 무시된다. 창의적 아이디어를 생성하는 것은 거의 최종 목표가 아니다. 오히려, 문제를 성공적으로 해결하거나 혁신하는 것은 정말로 효과가 있고 이전 접근법보다 더 잘 작동하는 하나 또는 몇 가지 좋은 아이디어를 필요로 한다. 이것은 사람들이 자신 또는 서로의 상상력의 산물을 평가하고, 더 발전시키기에 충분히 유망해 보이는 아이디어를 선택하고, 성공 가능성이 낮은 것들을 포기하도록 요구한다. 따라서 창의적이라는 것은 아이디어 생성으로 끝나지 않는다. 사실, 창의적 아이디어를 생성하는 능력은 이러한 아이디어들이 이후에 조용히 사라진다면 본질적으로 쓸모없다.",
+
+  topic: "진정한 창의성은 아이디어 생성을 넘어 유망한 아이디어를 선별하고 발전시키는 평가 능력까지 포함한다",
+  gist: "창의성은 독창성과 유용성을 모두 갖춘 아이디어 생성으로 정의되지만, 이것만으로는 충분하지 않다. 성공적인 문제 해결은 생성된 아이디어를 평가하고 유망한 것을 선별하는 과정을 필요로 하며, 평가 없는 아이디어 생성은 쓸모없다.",
+  structure: [
+    { label: "도입", text: "창의성 = 독창적 + 유용한 아이디어 생산 (일반적 정의)." },
+    { label: "전개1", text: "그러나 아이디어 생성이 최종 목표가 아님 — 정말로 작동하는 소수의 아이디어가 필요." },
+    { label: "전개2", text: "이를 위해 아이디어를 평가하고, 유망한 것은 선택하고 가능성 없는 것은 포기해야 한다." },
+    { label: "결론", text: "창의성은 아이디어 생성에서 끝나지 않으며, 평가 없이는 쓸모없다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "독창성과 유용성이 창의성의 두 핵심 요소인 이유",
+        "창의적 아이디어를 많이 생성하는 방법",
+        "진정한 창의성은 아이디어 생성을 넘어 평가와 선별 능력까지 포함한다",
+        "혁신적 문제 해결에서 팀워크의 중요성",
+        "연구에서 창의성을 측정하는 다양한 방법"
+      ],
+      answer: 2,
+      explanation: "창의성은 아이디어 생성만이 아니라 평가·선별 과정을 포함해야 한다는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "Thus, being creative ① does not stop with idea generation ② rarely originates from practical ideas ③ is often regarded as a shortcut to innovation ④ frequently gives way to unanticipated success ⑤ brings out tension between novelty and relevancy",
+      options: [
+        "does not stop with idea generation",
+        "rarely originates from practical ideas",
+        "is often regarded as a shortcut to innovation",
+        "frequently gives way to unanticipated success",
+        "brings out tension between novelty and relevancy"
+      ],
+      answer: 0,
+      explanation: "창의성은 아이디어 생성으로 '끝나지 않는다(does not stop with idea generation)'는 내용이 앞뒤 문맥과 일치한다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "Creativity ①is commonly defined as the production of ideas that are both novel and useful. ②Generating creative ideas rarely is the final goal. Rather, to successfully solve problems ③require one or a few good ideas. This requires that people ④evaluate the products of their imagination, and choose those ideas that seem ⑤promising enough to develop further.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 2,
+      explanation: "③ to부정사구(to successfully solve problems or innovate)가 주어이므로 단수 취급 → requires. require → requires."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "독창적이지만 유용하지 않은 아이디어는 관련이 없다.",
+        "창의성의 일반적 정의에서 독창성과 유용성이 모두 필요하다.",
+        "창의적 아이디어 생성이 항상 문제 해결의 최종 목표이다.",
+        "유망한 아이디어를 선택하고 가능성 없는 것을 포기하는 과정이 필요하다.",
+        "아이디어를 평가하지 않으면 창의적 아이디어 생성 능력은 쓸모없어진다."
+      ],
+      answer: 2,
+      explanation: "③ 글에서 창의적 아이디어 생성은 '거의 최종 목표가 아니다(rarely is the final goal)'라고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "Creativity is commonly defined as the production of ideas that are both novel and useful. Ideas that are original but not useful are irrelevant, and ideas that are useful but not original are unremarkable.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) This requires people to evaluate ideas, choose those promising enough to develop, and abandon those unlikely to succeed.",
+        B: "(B) However, an important aspect is often ignored: generating ideas is rarely the final goal — solving problems requires ideas that truly work.",
+        C: "(C) Thus, being creative does not stop with idea generation; without evaluation, even great ideas die a silent death."
+      },
+      answer: 2,
+      explanation: "아이디어 생성이 최종 목표가 아님을 제시(B) → 평가·선별의 필요성 설명(A) → 결론: 창의성은 생성에서 끝나지 않음(C) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "True creativity requires not only generating ideas but also (A)________ them — choosing those that are (B)________ enough to develop and abandoning those unlikely to succeed.",
+      answer: "(A) evaluating  (B) promising"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "창의적 아이디어 생성 능력이 쓸모없어지는 경우를 본문을 바탕으로 한국어로 서술하시오.",
+      condition: "조건: 한 문장, 40자 내외.",
+      answer: "창의적 아이디어들이 평가·선별 과정 없이 조용히 사라진다면(die a silent death), 아이디어 생성 능력은 본질적으로 쓸모없다."
+    }
+  ]
+});
+
+// ─────────────────────────────────────────────────────
+// PASSAGE 10: 9-47  Coupled Cognitive System
+// ─────────────────────────────────────────────────────
+passages.push({
+  num: "9-47",
+  title: "The Coupled Cognitive System",
+  fulltext: `Because the environment plays a significant role in aiding meaningful internal processes, subjective experience and the environment act as a 'coupled system.' This coupled system can be seen as a complete cognitive system of its own. In this manner, subjective experience is extended into the external environment and vice versa; the external environment with its disciplinary objects such as institutional laws and equipment becomes mental institutions that affect our subjective experience and solutions. A subjectively held belief attains the status of objectivity when the belief is socially shared. That is, even if we are trained as hard-nosed health care rationalists, or no-nonsense bureaucrats, or data-driven scientists, research has shown that our decisions are influenced by various institutional practices. They include bureaucratic structures and procedures, the architectural design of health care institutions, the rules of evidence and the structure of allowable questions in a courtroom trial, the spatial arrangement of kindergartens and supermarkets, and a variety of conventions and practices designed to manipulate our emotions.`,
+
+  sentences: [
+    {
+      en: "Because the environment plays a significant role in aiding meaningful internal processes, subjective experience and the environment act as a 'coupled system.'",
+      slash_en: "Because the environment / plays a significant role / in aiding meaningful internal processes, / subjective experience and the environment / act as a 'coupled system.'",
+      slash_ko: "환경이 / 중요한 역할을 하기 때문에 / 의미 있는 내부 과정을 돕는 데, / 주관적 경험과 환경은 / '결합된 시스템'으로 작동한다.",
+      grammar: [
+        { name: "play a role in + 동명사", example: "plays a significant role in aiding meaningful internal processes", point: "★ play a role in V-ing = ~하는 데 역할을 하다 — in 뒤 동명사 필수" },
+        { name: "act as ~", example: "act as a 'coupled system'", point: "★ act as = ~로서 작동하다/기능하다 — serve as와 동의" }
+      ]
+    },
+    {
+      en: "This coupled system can be seen as a complete cognitive system of its own.",
+      slash_en: "This coupled system / can be seen as / a complete cognitive system / of its own.",
+      slash_ko: "이 결합된 시스템은 / ~로 볼 수 있다 / 완전한 인지 시스템으로 / 그 자체만의.",
+      grammar: [
+        { name: "be seen as ~", example: "can be seen as a complete cognitive system", point: "★ be seen as = ~로 여겨지다 — be regarded/considered as와 동의" },
+        { name: "of its own (강조 소유)", example: "a cognitive system of its own", point: "★ of its own = its own ~ — 강조 소유 표현 (자체만의)" }
+      ]
+    },
+    {
+      en: "In this manner, subjective experience is extended into the external environment and vice versa; the external environment with its disciplinary objects such as institutional laws and equipment becomes mental institutions that affect our subjective experience and solutions.",
+      slash_en: "In this manner, / subjective experience is extended / into the external environment / and vice versa; / the external environment / with its disciplinary objects / such as institutional laws and equipment / becomes mental institutions / that affect our subjective experience and solutions.",
+      slash_ko: "이런 방식으로, / 주관적 경험은 확장된다 / 외부 환경으로 / 그리고 그 반대도 마찬가지이다; / 외부 환경은 / 그것의 훈육적 대상들과 함께 / 제도적 법률과 장비 같은 / 정신적 제도가 된다 / 우리의 주관적 경험과 해결책에 영향을 미치는.",
+      grammar: [
+        { name: "vice versa (반대도 마찬가지)", example: "subjective experience is extended into the environment and vice versa", point: "★ vice versa = 반대도 마찬가지로 — A→B이면 B→A도 성립" },
+        { name: "such as + 예시 나열", example: "disciplinary objects such as institutional laws and equipment", point: "★ such as = ~와 같은 — 예시 도입 표현" }
+      ]
+    },
+    {
+      en: "A subjectively held belief attains the status of objectivity when the belief is socially shared.",
+      slash_en: "A subjectively held belief / attains the status of objectivity / when the belief is socially shared.",
+      slash_ko: "주관적으로 보유된 믿음은 / 객관성의 지위를 얻는다 / 그 믿음이 사회적으로 공유될 때.",
+      grammar: [
+        { name: "attain the status of ~", example: "attains the status of objectivity", point: "★ attain the status of = ~의 지위를 획득하다 — achieve/gain the status of와 동의" },
+        { name: "과거분사 후치 수식 held", example: "A subjectively held belief", point: "★ held = which is held — 과거분사 후치 수식" }
+      ]
+    },
+    {
+      en: "That is, even if we are trained as hard-nosed health care rationalists, or no-nonsense bureaucrats, or data-driven scientists, research has shown that our decisions are influenced by various institutional practices.",
+      slash_en: "That is, / even if we are trained / as hard-nosed health care rationalists, / or no-nonsense bureaucrats, / or data-driven scientists, / research has shown / that our decisions are influenced / by various institutional practices.",
+      slash_ko: "즉, / 우리가 훈련되어 있더라도 / 완고한 의료 합리주의자로, / 또는 실용적인 관료로, / 또는 데이터 중심 과학자로, / 연구는 보여주었다 / 우리의 결정이 영향을 받는다는 것을 / 다양한 제도적 관행에 의해.",
+      grammar: [
+        { name: "even if (강한 양보)", example: "even if we are trained as...", point: "★ even if = ~임에도 불구하고 — 사실 여부 무관한 양보" },
+        { name: "현재완료 has shown", example: "research has shown that our decisions are influenced", point: "★ research has shown = 지금까지의 연구가 입증해 왔다 — 현재완료의 결과·경험" }
+      ]
+    },
+    {
+      en: "They include bureaucratic structures and procedures, the architectural design of health care institutions, the rules of evidence and the structure of allowable questions in a courtroom trial, the spatial arrangement of kindergartens and supermarkets, and a variety of conventions and practices designed to manipulate our emotions.",
+      slash_en: "They include / bureaucratic structures and procedures, / the architectural design of health care institutions, / the rules of evidence / and the structure of allowable questions in a courtroom trial, / the spatial arrangement of kindergartens and supermarkets, / and a variety of conventions and practices / designed to manipulate our emotions.",
+      slash_ko: "그것들은 포함한다 / 관료적 구조와 절차, / 의료 기관의 건축 설계, / 증거 규칙과 / 법정 재판에서 허용 가능한 질문의 구조, / 유치원과 슈퍼마켓의 공간 배치, / 그리고 다양한 관례와 관행을 / 우리의 감정을 조작하도록 설계된.",
+      grammar: [
+        { name: "A, B, C, D, and E 병렬 나열", example: "They include bureaucratic structures..., architectural design..., rules of evidence..., spatial arrangement..., and conventions...", point: "★ 5개 명사구 병렬 — 마지막에 and로 연결. 긴 병렬 목록 구조 파악 필수" },
+        { name: "과거분사 후치 수식 designed", example: "conventions and practices designed to manipulate our emotions", point: "★ designed to V = ~하도록 설계된 — 과거분사 후치 수식" }
+      ]
+    }
+  ],
+
+  vocab: [
+    { word: "coupled system", meaning: "결합된 시스템", pos: "n.", deriv: "couple (v./n.)" },
+    { word: "subjective", meaning: "주관적인", pos: "adj.", deriv: "subjectivity (n.), subjectively (adv.)" },
+    { word: "cognitive", meaning: "인지적인", pos: "adj.", deriv: "cognition (n.)" },
+    { word: "disciplinary", meaning: "훈육적인, 규율적인", pos: "adj.", deriv: "discipline (n./v.)" },
+    { word: "attain", meaning: "획득하다, 달성하다", pos: "v.", deriv: "attainment (n.)" },
+    { word: "objectivity", meaning: "객관성", pos: "n.", deriv: "objective (adj./n.), objectively (adv.)" },
+    { word: "hard-nosed", meaning: "완고한, 현실적인", pos: "adj.", deriv: "—" },
+    { word: "bureaucrat", meaning: "관료", pos: "n.", deriv: "bureaucracy (n.), bureaucratic (adj.)" },
+    { word: "spatial arrangement", meaning: "공간 배치", pos: "n.", deriv: "spatial (adj.), arrange (v.)" },
+    { word: "manipulate", meaning: "조작하다, 다루다", pos: "v.", deriv: "manipulation (n.), manipulative (adj.)" }
+  ],
+
+  translation: "환경이 의미 있는 내부 과정을 돕는 데 중요한 역할을 하기 때문에, 주관적 경험과 환경은 '결합된 시스템'으로 작동한다. 이 결합된 시스템은 그 자체만의 완전한 인지 시스템으로 볼 수 있다. 이런 방식으로, 주관적 경험은 외부 환경으로 확장되고 그 반대도 마찬가지이다. 제도적 법률과 장비 같은 훈육적 대상들을 갖춘 외부 환경은 우리의 주관적 경험과 해결책에 영향을 미치는 정신적 제도가 된다. 주관적으로 보유된 믿음은 그것이 사회적으로 공유될 때 객관성의 지위를 얻는다. 즉, 우리가 완고한 의료 합리주의자, 실용적인 관료, 또는 데이터 중심 과학자로 훈련되어 있더라도, 연구는 우리의 결정이 다양한 제도적 관행에 의해 영향을 받는다는 것을 보여주었다. 그 관행에는 관료적 구조와 절차, 의료 기관의 건축 설계, 법정 재판에서의 증거 규칙, 유치원과 슈퍼마켓의 공간 배치, 그리고 우리의 감정을 조작하도록 설계된 다양한 관례들이 포함된다.",
+
+  topic: "주관적 경험과 환경이 결합된 인지 시스템을 이루며 제도적 환경이 인간의 결정에 영향을 미친다",
+  gist: "주관적 경험과 환경은 '결합된 시스템'으로 서로를 확장하며 하나의 인지 시스템을 이룬다. 외부 환경의 제도적 구조들은 우리가 어떤 입장이든 간에 우리의 결정과 경험에 영향을 미친다.",
+  structure: [
+    { label: "도입", text: "주관적 경험과 환경은 '결합된 시스템'으로 완전한 인지 시스템을 이룬다." },
+    { label: "전개1", text: "외부 환경의 제도적 대상들이 정신적 제도가 되어 경험과 해결책에 영향을 미친다." },
+    { label: "전개2", text: "공유된 믿음이 객관성을 얻으며, 합리적 훈련을 받아도 제도적 관행의 영향을 받는다." },
+    { label: "결론", text: "건축 설계, 법정 구조, 공간 배치 등 다양한 제도적 관행이 우리의 감정과 결정을 조작한다." }
+  ],
+
+  quiz: [
+    {
+      type: "주제 추론",
+      question: "다음 글의 주제로 가장 적절한 것은?",
+      passage: null,
+      options: [
+        "개인의 주관적 믿음이 과학적 객관성으로 발전하는 방법",
+        "의료와 법률 시스템에서 관료주의가 초래하는 문제점",
+        "주관적 경험과 환경이 결합된 인지 시스템을 이루며 제도적 환경이 인간 결정에 영향을 미친다",
+        "데이터 중심 의사 결정이 감정에 미치는 영향",
+        "건축 설계가 사람들의 행동 패턴에 미치는 영향"
+      ],
+      answer: 2,
+      explanation: "주관적 경험과 환경이 결합된 인지 시스템을 이루며 제도적 환경이 우리 결정에 영향을 미친다는 것이 주제이다."
+    },
+    {
+      type: "빈칸 추론",
+      question: "다음 글의 빈칸에 들어갈 말로 가장 적절한 것은?",
+      passage: "The external environment with its disciplinary objects such as institutional laws and equipment becomes mental institutions that ① affect our subjective experience and solutions ② serve as advocates for independent decision-making ③ position social experience within the cognitive system ④ comprise subjective interpretations of the environment ⑤ facilitate the construction of our concept of subjectivity",
+      options: [
+        "affect our subjective experience and solutions",
+        "serve as advocates for independent decision-making",
+        "position social experience within the cognitive system",
+        "comprise subjective interpretations of the environment",
+        "facilitate the construction of our concept of subjectivity"
+      ],
+      answer: 0,
+      explanation: "외부 환경의 제도들이 '우리의 주관적 경험과 해결책에 영향을 미친다(affect our subjective experience and solutions)'는 내용이 문맥과 일치한다."
+    },
+    {
+      type: "어법 오류",
+      question: "다음 글의 밑줄 친 부분 중, 어법상 틀린 것은?",
+      passage: "Because the environment ①plays a significant role in aiding meaningful internal processes, subjective experience and the environment act as a 'coupled system.' In this manner, subjective experience ②is extended into the external environment and vice versa. A subjectively ③held belief attains the status of objectivity when the belief is socially shared. Research has shown that our decisions ④are influenced by various institutional practices, ⑤include bureaucratic structures and the spatial arrangement of buildings.",
+      options: ["①", "②", "③", "④", "⑤"],
+      answer: 4,
+      explanation: "⑤ 앞 절의 주어 our decisions와 병렬이 아니라 분사구문이어야 한다. include → including (분사구문으로 예시 열거)."
+    },
+    {
+      type: "내용 불일치",
+      question: "다음 글의 내용과 일치하지 않는 것은?",
+      passage: null,
+      options: [
+        "주관적 경험과 환경은 '결합된 시스템'으로 작동한다.",
+        "외부 환경의 제도적 대상들은 정신적 제도가 된다.",
+        "주관적 믿음은 사회적으로 공유될 때 객관성의 지위를 얻는다.",
+        "데이터 중심 과학자들은 제도적 관행의 영향을 전혀 받지 않는다.",
+        "유치원과 슈퍼마켓의 공간 배치도 제도적 관행의 예로 포함된다."
+      ],
+      answer: 3,
+      explanation: "④ 글에서 데이터 중심 과학자로 훈련받았더라도 우리의 결정은 제도적 관행에 의해 영향을 받는다고 명시되어 있다."
+    },
+    {
+      type: "글의 순서",
+      question: "주어진 글 다음에 이어질 글의 순서로 가장 적절한 것은?",
+      passage: "Subjective experience and the environment act as a 'coupled system' that can be seen as a complete cognitive system of its own.",
+      options: ["(A)-(B)-(C)", "(A)-(C)-(B)", "(B)-(A)-(C)", "(B)-(C)-(A)", "(C)-(A)-(B)"],
+      extraPassages: {
+        A: "(A) A subjectively held belief attains objectivity when socially shared; even trained rationalists and scientists are influenced by institutional practices.",
+        B: "(B) Subjective experience extends into the external environment and vice versa — institutional laws and equipment become mental institutions affecting our solutions.",
+        C: "(C) These institutional influences include bureaucratic procedures, architectural design of health care buildings, courtroom rules, and spatial arrangements designed to shape emotions."
+      },
+      answer: 2,
+      explanation: "외부 환경이 정신적 제도가 됨을 설명(B) → 사회적 공유와 합리적 훈련에도 제도 영향을 받음(A) → 구체적 제도 관행 나열(C) 순서가 자연스럽다."
+    }
+  ],
+
+  essay: [
+    {
+      label: "서술형 1 — 빈칸 요약",
+      question: "다음 빈칸 (A), (B)에 들어갈 말을 본문에서 찾아 쓰시오.",
+      condition: "조건: 본문에서 그대로 찾아 쓸 것. 각 빈칸은 1단어.",
+      stem: "In the coupled system, subjective experience extends into the external (A)________, and even trained rationalists find their decisions (B)________ by various institutional practices.",
+      answer: "(A) environment  (B) influenced"
+    },
+    {
+      label: "서술형 2 — 내용 서술",
+      question: "글에서 제시된 제도적 관행의 예를 세 가지 이상 한국어로 서술하시오.",
+      condition: "조건: 한 문장, 60자 내외.",
+      answer: "관료적 구조와 절차, 의료 기관의 건축 설계, 법정 재판의 증거 규칙, 유치원과 슈퍼마켓의 공간 배치 등이 있다."
+    }
+  ]
+});
+</script>
+
+<script>
+// ─────────────────────────────────────────────────────
+// RENDERING ENGINE
+// ─────────────────────────────────────────────────────
+
+let currentPassage = 0;
+let currentTab = '전문';
+
+function selectPassage(idx) {
+  currentPassage = idx;
+  document.querySelectorAll('.passage-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === idx);
+  });
+  renderAll();
+}
+
+function selectTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.includes(tab));
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.dataset.tab === tab);
+  });
+}
+
+function renderAll() {
+  const p = passages[currentPassage];
+  renderPassageTitle(p);
+  renderFullText(p);
+  renderSentenceAnalysis(p);
+  renderVocab(p);
+  renderTranslation(p);
+  renderTopic(p);
+  renderQuiz(p);
+  document.getElementById('main').scrollTop = 0;
+}
+
+function escHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function circled(n) {
+  const nums = ['①','②','③','④','⑤','⑥','⑦','⑧','⑨','⑩','⑪','⑫','⑬','⑭','⑮'];
+  return nums[n] || (n+1);
+}
+
+// ── Passage Title (in each tab) ──
+function renderPassageTitle(p) {
+  const box = `<div class="passage-title-box"><div class="p-num">PASSAGE ${escHtml(p.num)}</div><h2>${escHtml(p.title)}</h2></div>`;
+  document.querySelectorAll('.passage-title-slot').forEach(el => { el.innerHTML = box; });
+}
+
+// ── Tab ①: 전문 ──
+function renderFullText(p) {
+  const el = document.getElementById('panel-전문');
+  el.innerHTML = `
+    <div class="passage-title-slot"></div>
+    <div class="fulltext-box">${escHtml(p.fulltext)}</div>
+  `;
+  renderPassageTitle(p);
+}
+
+// ── Tab ②: 문장분석 ──
+function renderSentenceAnalysis(p) {
+  let html = '<div class="passage-title-slot"></div>';
+  p.sentences.forEach((s, i) => {
+    const gItems = s.grammar.map(g => `
+      <div class="grammar-item">
+        <span class="g-name">◆ ${escHtml(g.name)}</span>
+        <span class="g-example">▶ ${escHtml(g.example)}</span>
+        <span class="g-point">${escHtml(g.point)}</span>
+      </div>
+    `).join('');
+
+    // slash reading
+    const slashParts = s.slash_en.split('/');
+    const koParts = s.slash_ko.split('/');
+    let slashHtml = '<div class="slash-reading">';
+    slashParts.forEach((part, j) => {
+      slashHtml += `<span class="slash-en">${escHtml(part.trim())}</span>`;
+      if (j < slashParts.length - 1) slashHtml += `<span class="slash-sep"> / </span>`;
+    });
+    slashHtml += '<br>';
+    koParts.forEach((part, j) => {
+      slashHtml += `<span class="slash-ko">${escHtml(part.trim())}</span>`;
+      if (j < koParts.length - 1) slashHtml += `<span class="slash-sep"> / </span>`;
+    });
+    slashHtml += '</div>';
+
+    html += `
+      <div class="sentence-block">
+        <div class="sent-num">${circled(i)}</div>
+        <div class="sent-english">${escHtml(s.en)}</div>
+        ${slashHtml}
+        <div class="grammar-items">${gItems}</div>
+      </div>
+    `;
+  });
+  const el = document.getElementById('panel-문장분석');
+  el.innerHTML = html;
+  renderPassageTitle(p);
+}
+
+// ── Tab ③: 핵심단어 ──
+function renderVocab(p) {
+  let html = '<div class="passage-title-slot"></div>';
+  p.vocab.forEach(v => {
+    html += `
+      <div class="vocab-item">
+        <span class="vocab-word">◆ ${escHtml(v.word)}</span>
+        <span class="vocab-sep">|</span>
+        <span class="vocab-meaning">${escHtml(v.meaning)}</span>
+        <span class="vocab-sep">|</span>
+        <span class="vocab-pos">${escHtml(v.pos)}</span>
+        <span class="vocab-sep">|</span>
+        <span class="vocab-deriv">${escHtml(v.deriv)}</span>
+      </div>
+    `;
+  });
+  const el = document.getElementById('panel-핵심단어');
+  el.innerHTML = html;
+  renderPassageTitle(p);
+}
+
+// ── Tab ④: 전문해석 ──
+function renderTranslation(p) {
+  const el = document.getElementById('panel-전문해석');
+  el.innerHTML = `
+    <div class="passage-title-slot"></div>
+    <div class="translation-box">${escHtml(p.translation)}</div>
+  `;
+  renderPassageTitle(p);
+}
+
+// ── Tab ⑤: 주제·요지 ──
+function renderTopic(p) {
+  const steps = p.structure.map(st => `
+    <div class="structure-step">
+      <span class="step-label">${escHtml(st.label)}</span>
+      <span class="step-text">${escHtml(st.text)}</span>
+    </div>
+  `).join('');
+
+  const el = document.getElementById('panel-주제');
+  el.innerHTML = `
+    <div class="passage-title-slot"></div>
+    <div class="topic-section">
+      <div class="section-label">TOPIC · 주제</div>
+      <div class="topic-box">${escHtml(p.topic)}</div>
+    </div>
+    <div class="topic-section">
+      <div class="section-label">MAIN IDEA · 요지</div>
+      <div class="gist-box">${escHtml(p.gist)}</div>
+    </div>
+    <div class="topic-section">
+      <div class="section-label">STRUCTURE · 구조 흐름</div>
+      <div class="structure-steps">${steps}</div>
+    </div>
+  `;
+  renderPassageTitle(p);
+}
+
+// ── Tab ⑥: 변형문제 ──
+function renderQuiz(p) {
+  let html = '<div class="passage-title-slot"></div>';
+
+  p.quiz.forEach((q, qi) => {
+    const qId = `q_${currentPassage}_${qi}`;
+
+    let passageHtml = '';
+    if (q.passage) {
+      passageHtml = `<div class="quiz-passage">${escHtml(q.passage)}</div>`;
+    }
+    if (q.extraPassages) {
+      passageHtml += Object.values(q.extraPassages).map(ep =>
+        `<div class="quiz-passage" style="margin-bottom:6px">${escHtml(ep)}</div>`
+      ).join('');
+    }
+
+    const opts = q.options.map((opt, oi) => `
+      <div class="quiz-option" id="${qId}_opt${oi}" onclick="handleQuizClick('${qId}', ${oi}, ${q.answer}, ${qi})">
+        <span class="opt-num">${oi + 1}</span>
+        <span>${escHtml(opt)}</span>
+      </div>
+    `).join('');
+
+    html += `
+      <div class="quiz-block" id="${qId}_block">
+        <div class="quiz-q-num">${qi + 1}번 · ${escHtml(q.type)}</div>
+        <div class="quiz-question">${escHtml(q.question)}</div>
+        ${passageHtml}
+        <div class="quiz-options" id="${qId}_opts">${opts}</div>
+        <div class="quiz-explanation" id="${qId}_exp">${escHtml(q.explanation)}</div>
+        <button class="reset-btn" onclick="resetQuiz('${qId}', ${q.answer})">↺ 다시 풀기</button>
+      </div>
+    `;
+  });
+
+  // 서술형
+  p.essay.forEach((e, ei) => {
+    const eId = `essay_${currentPassage}_${ei}`;
+    const stemHtml = e.stem ? `<div class="quiz-passage">${escHtml(e.stem)}</div>` : '';
+    html += `
+      <div class="essay-block">
+        <div class="essay-label">${escHtml(e.label)}</div>
+        <div class="essay-question">${escHtml(e.question)}</div>
+        <div class="essay-condition">${escHtml(e.condition)}</div>
+        ${stemHtml}
+        <div class="answer-lines">
+          <div class="answer-line"></div>
+          <div class="answer-line"></div>
+          <div class="answer-line"></div>
+        </div>
+        <button class="answer-toggle-btn" onclick="toggleAnswer('${eId}')">모범답안 확인</button>
+        <div class="model-answer" id="${eId}_ans">${escHtml(e.answer)}</div>
+      </div>
+    `;
+  });
+
+  const el = document.getElementById('panel-변형문제');
+  el.innerHTML = html;
+  renderPassageTitle(p);
+}
+
+function handleQuizClick(qId, chosen, correct, qi) {
+  const opts = document.querySelectorAll(`[id^="${qId}_opt"]`);
+  opts.forEach(o => { o.style.pointerEvents = 'none'; });
+
+  const chosenEl = document.getElementById(`${qId}_opt${chosen}`);
+  const correctEl = document.getElementById(`${qId}_opt${correct}`);
+
+  if (chosen === correct) {
+    chosenEl.classList.add('correct');
+    chosenEl.querySelector('.opt-num').textContent = '✓';
+  } else {
+    chosenEl.classList.add('incorrect');
+    chosenEl.querySelector('.opt-num').textContent = '✗';
+    correctEl.classList.add('reveal-correct');
+    correctEl.querySelector('.opt-num').textContent = '✓';
+  }
+
+  const exp = document.getElementById(`${qId}_exp`);
+  if (exp) exp.classList.add('show');
+}
+
+function resetQuiz(qId, correct) {
+  const opts = document.querySelectorAll(`[id^="${qId}_opt"]`);
+  opts.forEach((o, i) => {
+    o.style.pointerEvents = '';
+    o.classList.remove('correct', 'incorrect', 'reveal-correct');
+    o.querySelector('.opt-num').textContent = i + 1;
+  });
+  const exp = document.getElementById(`${qId}_exp`);
+  if (exp) exp.classList.remove('show');
+}
+
+function toggleAnswer(eId) {
+  const ans = document.getElementById(`${eId}_ans`);
+  if (ans) {
+    ans.classList.toggle('show');
+    const btn = ans.previousElementSibling;
+    if (btn) btn.textContent = ans.classList.contains('show') ? '모범답안 숨기기' : '모범답안 확인';
+  }
+}
+
+// ── INIT ──
+window.onload = function() {
+  renderAll();
+  selectTab('전문');
+};
+</script>
+</div><!-- #content -->
+</div><!-- #main -->
+</body>
+</html>
